@@ -32,3 +32,8 @@ function buy(user_id, baseCurrency, baseAmount, buyCurrency, buyAmount) {
 function sell(user_id, baseCurrency, baseAmount, sellCurrency, sellAmount) {
 
 }
+
+// list up user's all currency and amount based on parameter object
+function showMyCurrencyList(userOwnObject) {
+
+}
