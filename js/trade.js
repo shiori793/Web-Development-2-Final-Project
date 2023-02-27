@@ -9,24 +9,26 @@ https://api.freecurrencyapi.com/v1/latest?apikey=<API_KEY>&base_currency=<BASE_C
 
 
 // get user id from session storage and search data from local storage
+// update localStorage
 $( window ).load(function() {
     // Run code
 });
 
 
-
-function calculateCurrency(baseCurrency, calcCurrency) {
+// this function is executed when user entered the value user want to buy or sell
+// return the value calculated based on current currency rate
+function calculateCurrency(baseCurrency, calcCurrency, amount) {
 
 }
 
 
-
+// check user's amount and buy currency
 function buy(user_id, baseCurrency, baseAmount, buyCurrency, buyAmount) {
 
 }
 
 
-
+// check user's amount and sell currency
 function sell(user_id, baseCurrency, baseAmount, sellCurrency, sellAmount) {
 
 }
