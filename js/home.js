@@ -37,7 +37,7 @@
 // add list object to home.html
 // showCurrencyRateList
     const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-    const apiURL = "https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}/";
+    const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
     fetch(apiURL)
     .then(response => response.json())
