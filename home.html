@@ -15,9 +15,35 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
+		<script src="js/home.js"></script>
 		<link href="./css/home.css" rel="stylesheet" />
 	</head>
 	<body>
+		<header>
+			<!-- navbar -->
+			<ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Dashboard</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Trade</button>
+				</li>
+			</ul>
+		</header>
+
+		<main>
+			<div class="totalAmounts">
+				<div class="moneySaved"></div>
+				<div class="revenueMade"></div>
+			</div>
+			<div class="rate"></div>
+			<div class="chart"></div>
+		</main>
+
+		<footer>
+			<!-- footer -->
+		</footer>
+
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="

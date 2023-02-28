@@ -36,5 +36,20 @@ function calculateProfit(userObject, currentRateList) {
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
 function showCurrencyRateList(currencyListObject) {
+    const apiURL = "https://api.freecurrencyapi.com/v1/latest?apikey=h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
 
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        // console.log(data);
+        const exchangeRates = data;
+        const exchangeRateList = document.createElement('ul');
+        for (let i = 0; i < exchangeRates.length; i++) {
+        const exchangeRateItem = document.createElement('li');
+        exchangeRateItem.textContent = `${exchangeRates}`;
+        exchangeRateList.appendChild(exchangeRateItem);
+        }
+        document.body.appendChild(exchangeRateList);
+    })
+    .catch(error => console.error('Error fetching exchange rates:', error));
 }
