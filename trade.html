@@ -99,44 +99,40 @@
 					<h1>Trade Now</h1>
 					<div class="container d-flex flex-column align-items-center">
 						<div class="input-group mb-3 mt-3 base-currency">
-							<select class="form-select" id="inputGroupSelect01">
-								<option value="CAD" selected>CAD</option>
-								<option value="USD">USD</option>
-								<option value="JPY">JPY</option>
+							<select class="form-select" id="base-currency-select">
 							</select>
 							<div class="form-floating w-50">
 								<input
-									type="text"
+									type="number"
 									class="form-control"
 									aria-label="Text input with dropdown button"
 									id="base-currency-input"
 									placeholder="100"
+									min="1"
 								/>
 								<label for="base-currency-input">Amount</label>
 							</div>
 						</div>
 						<i class="fa-solid fa-arrow-down mb-3"></i>
 						<div class="input-group mb-5 for-currency">
-							<select class="form-select" id="inputGroupSelect01">
-								<option value="USD" selected>USD</option>
-								<option value="CAD">CAD</option>
-								<option value="JPY">JPY</option>
+							<select class="form-select" id="change-currency-select">
 							</select>
 							<div class="form-floating w-50">
 								<input
-									type="text"
+									type="number"
 									class="form-control"
 									aria-label="Text input with dropdown button"
-									id="base-currency-input"
+									id="change-currency-input"
 									placeholder="100"
+									min="1"
 								/>
-								<label for="base-currency-input">Amount</label>
+								<label for="change-currency-input">Amount</label>
 							</div>
 						</div>
 					</div>
 					<div class="trade-buttons d-flex justify-content-evenly">
-						<button type="" class="btn btn-primary w-50 me-1">BUY</button>
-						<button type="" class="btn btn-danger w-50 ms-1">SELL</button>
+						<button type="" class="btn btn-primary w-50 me-1" value="BUY" id="buy-button">BUY</button>
+						<button type="" class="btn btn-danger w-50 ms-1" value="SELL" id="sell-button">SELL</button>
 					</div>
 				</div>
 			</div>
