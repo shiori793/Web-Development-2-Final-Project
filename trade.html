@@ -16,12 +16,157 @@
 			crossorigin="anonymous"
 		></script>
 		<link href="./css/trade.css" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+			integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 	</head>
 	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg bg-light">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">Navbar</a>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Link</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a
+									class="nav-link dropdown-toggle"
+									href="#"
+									role="button"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+									Dropdown
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Action</a></li>
+									<li><a class="dropdown-item" href="#">Another action</a></li>
+									<li><hr class="dropdown-divider" /></li>
+									<li>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link disabled">Disabled</a>
+							</li>
+						</ul>
+						<form class="d-flex" role="search">
+							<input
+								class="form-control me-2"
+								type="search"
+								placeholder="Search"
+								aria-label="Search"
+							/>
+							<button class="btn btn-outline-success" type="submit">
+								Search
+							</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main class="py-5 px-1">
+			<div class="container-fluid d-flex flex-column flex-md-row">
+				<div class="container col-md-6 col-sm-12 p-5" id="my-balance">
+					<h1>My Balance</h1>
+				</div>
+				<div
+					class="container col-md-6 col-sm-12 h-100 bg-light rounded p-5"
+					id="trade-box"
+				>
+					<h1>Trade Now</h1>
+					<div class="container d-flex flex-column align-items-center">
+						<div class="input-group mb-3 mt-3 base-currency">
+							<select class="form-select" id="inputGroupSelect01">
+								<option value="CAD" selected>CAD</option>
+								<option value="USD">USD</option>
+								<option value="JPY">JPY</option>
+							</select>
+							<div class="form-floating w-50">
+								<input
+									type="text"
+									class="form-control"
+									aria-label="Text input with dropdown button"
+									id="base-currency-input"
+									placeholder="100"
+								/>
+								<label for="base-currency-input">Amount</label>
+							</div>
+						</div>
+						<i class="fa-solid fa-arrow-down mb-3"></i>
+						<div class="input-group mb-5 for-currency">
+							<select class="form-select" id="inputGroupSelect01">
+								<option value="USD" selected>USD</option>
+								<option value="CAD">CAD</option>
+								<option value="JPY">JPY</option>
+							</select>
+							<div class="form-floating w-50">
+								<input
+									type="text"
+									class="form-control"
+									aria-label="Text input with dropdown button"
+									id="base-currency-input"
+									placeholder="100"
+								/>
+								<label for="base-currency-input">Amount</label>
+							</div>
+						</div>
+					</div>
+					<div class="trade-buttons d-flex justify-content-evenly">
+						<button type="" class="btn btn-primary w-50 me-1">BUY</button>
+						<button type="" class="btn btn-danger w-50 ms-1">SELL</button>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="py-3 my-4">
+			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Home</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Features</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Pricing</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">FAQs</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">About</a>
+				</li>
+			</ul>
+			<p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+		</footer>
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 			crossorigin="anonymous"
 		></script>
+		<script src="./js/trade.js"></script>
 	</body>
 </html>
