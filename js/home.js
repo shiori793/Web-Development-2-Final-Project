@@ -34,8 +34,9 @@
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-// showCurrencyRateList
+    async function showCurrencyRateList(){
     const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
+    // const baseCurrency = mainCurrency;
     const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
     fetch(apiURL)
@@ -51,6 +52,8 @@
         document.body.appendChild(exchangeRateList);
     })
     .catch(error => console.error('Error fetching exchange rates:', error));
+    }
+    showCurrencyRateList();
 
 //Chart.js
     async function showGraph(date_from, currency, base_currency) {
@@ -61,7 +64,7 @@
     const day = `${now.getDate() - 1}`.padStart(2, 0);
     date_to = `${year}-${month}-${day}`;
 
-  //  -------------------   Sample ------------------- 　//
+  //  -------------------   Sample ------------------- //
     date_from = `${year}-${month}-${day - 7}`; //１週間前
     currency = "USD";
     base_currency = "CAD";
