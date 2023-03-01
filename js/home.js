@@ -13,7 +13,7 @@
 // show current currency rate list on the page
 
 // $( window ).load(function() {
-    // Run code
+// Run code
 // });
 
 // parameter: userAmount object (userInput, userOwn), main currency
@@ -29,7 +29,6 @@
 // function calculateProfit(userObject, currentRateList) {
 
 // }
-
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
@@ -49,18 +48,24 @@
         listArea.appendChild(exchangeRateItem);
         }
     })
-    .catch(error => console.error('Error fetching exchange rates:', error));
-    }
-    showCurrencyRateList();
+    .catch((error) => console.error("Error fetching exchange rates:", error));
+}
+showCurrencyRateList();
 
 //Chart.js
-    async function showGraph(date_from, currency, base_currency) {
-  // Get date
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = `${now.getMonth() + 1}`.padStart(2, 0);
-  const day = `${now.getDate() - 1}`.padStart(2, 0);
-  date_to = `${year}-${month}-${day}`;
+
+async function getAPI(
+  yearsToSubtract = 0,
+  monthsToSubtract = 0,
+  daysToSubtract = 7,
+  base_currency = "CAD",
+  currency = "USD"
+) {
+  //  ------------------ Get date ------------------  //
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `${today.getMonth() + 1}`.padStart(2, 0);
+  const day = `${today.getDate() - 1}`.padStart(2, 0);
 
   const pastDate = new Date(
     today.getFullYear() - yearsToSubtract,
@@ -157,46 +162,16 @@ getAPI();
 function showGraph(labels, datas) {
   const ctx = document.getElementById("chart");
   const rateChart = new Chart(ctx, {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const day = `${now.getDate() - 1}`.padStart(2, 0);
-    date_to = `${year}-${month}-${day}`;
-
-  //  -------------------   Sample ------------------- //
-    date_from = `${year}-${month}-${day - 7}`; //１週間前
-    currency = "USD";
-    base_currency = "CAD";
-  //  ------------------------------------------------ //
-
-  // API
-    const key = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
-    const url = `https://api.freecurrencyapi.com/v1/historical?apikey=${key}&date_from=${date_from}&date_to=${date_to}&base_currency=${base_currency}&currencies=${currency}`;
-    const res = await fetch(url);
-    const data = await res.json();
-
-    const datas = []; // Date
-    const labels = []; // Rate
-    const apiDatas = data.data;
-    for (const key in apiDatas) {
-    if (apiDatas.hasOwnProperty(key)) {
-        labels.push(key);
-        datas.push(Object.values(apiDatas[key])[0]);
-    }
-    }
-
-    const ctx = document.getElementById("chart");
-    new Chart(ctx, {
     type: "line",
     data: {
-        labels: labels,
-        datasets: [
+      labels: labels,
+      datasets: [
         {
-            label: "Rate",
-            data: datas,
-            borderWidth: 1,
+          label: "Rate",
+          data: datas,
+          borderWidth: 1,
         },
-        ],
+      ],
     },
     // options: {
     //   scales: {
