@@ -1,8 +1,48 @@
+$primary-fontsize: 10px;
+$secondary-fontsize: 30px;
+
 main{
   .totalAmounts {
     display: flex;
+    justify-content: center;
+    margin: 4rem;
+    .fa-coins {
+      padding-top: 3rem;
+      font-size: 30px;
+    }
     .moneySaved {
-      text-align: center;
+      padding: 0.5rem 2rem 0 1rem;
+      border-right: solid black 1px;
+      .words {
+        font-size: $primary-fontsize;
+      }
+      .price {
+        font-size: $secondary-fontsize;
+      }
+    }
+    .revenueMade {
+      padding: 0.5rem 2rem 0 2rem;
+      .words {
+        font-size: $primary-fontsize;
+      }
+      .price {
+        font-size: $secondary-fontsize;
+      }
+    }
+  }
+  .dataSection {
+    display: flex;
+    justify-content: center;
+    .rateList {
+      list-style: none;
+      padding: 2rem 2rem;
+      font-size: 24px;
+      li {
+        padding: 0.5rem;
+      }
+    }
+    .chart {
+      padding: 0 2rem;
     }
   }
 }

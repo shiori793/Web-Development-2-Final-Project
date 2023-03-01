@@ -32,22 +32,21 @@
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-async function showCurrencyRateList() {
-  const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-  // const baseCurrency = mainCurrency;
-  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
+    async function showCurrencyRateList(){
+    const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
+    // const baseCurrency = mainCurrency;
+    const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
-  fetch(apiURL)
-    .then((response) => response.json())
-    .then((data) => {
-      const exchangeRates = data.data;
-      const exchangeRateList = document.createElement("ul");
-      for (const item in exchangeRates) {
-        const exchangeRateItem = document.createElement("li");
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+        const exchangeRates = data.data;
+        const listArea = document.querySelector(".rateList");
+        for (const item in exchangeRates) {
+        const exchangeRateItem = document.createElement('li');
         exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
-        exchangeRateList.appendChild(exchangeRateItem);
-      }
-      document.body.appendChild(exchangeRateList);
+        listArea.appendChild(exchangeRateItem);
+        }
     })
     .catch((error) => console.error("Error fetching exchange rates:", error));
 }
