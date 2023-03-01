@@ -15,16 +15,71 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-    <link href="./css/home.css" rel="stylesheet" />
-  </head>
-  <body>
-    <canvas id="chart"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script
       src="https://code.jquery.com/jquery-3.6.3.js"
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-    <script src="./js/home.js"></script>
+    <script src="js/home.js"></script>
+    <link href="./css/home.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <!-- navbar -->
+      <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="home-tab-pane"
+            aria-selected="true"
+          >
+            Dashboard
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="profile-tab-pane"
+            aria-selected="false"
+          >
+            Trade
+          </button>
+        </li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="totalAmounts">
+        <div class="moneySaved"></div>
+        <div class="revenueMade"></div>
+      </div>
+      <div class="rate"></div>
+      <div class="chart">
+        <button type="button" class="btn btn-light btn-1w">1 Week</button>
+        <button type="button" class="btn btn-light btn-1m">1 Month</button>
+        <button type="button" class="btn btn-light btn-3m">3 Month</button>
+        <button type="button" class="btn btn-light btn-6m">6 Month</button>
+        <button type="button" class="btn btn-light btn-1y">1 Year</button>
+        <button type="button" class="btn btn-light btn-3y">3 Year</button>
+        <button type="button" class="btn btn-light btn-5y">5 Year</button>
+        <canvas id="chart"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      </div>
+    </main>
+
+    <footer>
+      <!-- footer -->
+    </footer>
   </body>
 </html>
