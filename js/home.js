@@ -13,7 +13,7 @@
 // show current currency rate list on the page
 
 window.onload = function() {
-  //  ------------------ Deposit Modal ------------------  //
+  //  ----------------- Deposit Modal -----------------  //
   const deposit = document.querySelector(".deposit");
   const depositModal = document.querySelector(".depositModal");
   const closeModal = document.querySelector(".closeModal");
