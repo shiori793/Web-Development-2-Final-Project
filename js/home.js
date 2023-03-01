@@ -43,13 +43,12 @@
     .then(response => response.json())
     .then(data => {
         const exchangeRates = data.data;
-        const exchangeRateList = document.createElement('ul');
+        const listArea = document.querySelector(".rateList");
         for (const item in exchangeRates) {
         const exchangeRateItem = document.createElement('li');
         exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
-        exchangeRateList.appendChild(exchangeRateItem);
+        listArea.appendChild(exchangeRateItem);
         }
-        document.body.appendChild(exchangeRateList);
     })
     .catch(error => console.error('Error fetching exchange rates:', error));
     }
@@ -109,6 +108,7 @@
   });
 }
 showGraph();
+
 
 //ロードした時はデフォルトでUSD（今年分表示）
 //各通貨を選択した場合、getGraphの引数currencyに通貨の名前を渡して関数を呼ぶ（今年分）

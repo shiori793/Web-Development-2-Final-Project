@@ -17,7 +17,7 @@
 		></script>
 		<script src="js/home.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link href="../css/home.css" rel="stylesheet" />
+		<link href="./css/home.css" rel="stylesheet" />
 	</head>
 	<body>
 		<header>
@@ -36,19 +36,24 @@
 			<div class="totalAmounts">
 				<i class="fa-solid fa-coins"></i>
 				<div class="moneySaved">
-					<p>MONEY SAVED</p>
-					<p>CAD 100,000.00</p>
+					<p class="words">MONEY SAVED</p>
+					<p class="price">CAD 100,000.00</p>
 				</div>
 				<div class="revenueMade">
-					<p>REVENUE MADE</p>
-					<p>CAD 50,000.00</p>
+					<p class="words">REVENUE MADE</p>
+					<p class="price">CAD 50,000.00</p>
 				</div>
 			</div>
-			<div class="rate"></div>
-			<div class="chart">
-            <canvas id="chart"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      </div>
+			<div class="dataSection">
+				<div class="rate">
+					<ul class="rateList"></ul>
+				</div>
+				<div class="chart">
+					<canvas id="chart" width="600" height="300" style="display: block; box-sizing: border-box; height: 400px; width: 800px;"></canvas>
+							<!-- <canvas id="chart"></canvas> -->
+							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				</div>
+			</div>
 		</main>
 
 		<footer>
