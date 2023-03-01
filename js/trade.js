@@ -397,6 +397,7 @@ $('.trade-button').on('click', async function () {
 
 // list up user's all currency and amount based on parameter object
 function showMyCurrencyList(userOwnObject) {
+
     $('#my-balance-table').remove();
     if(Object.keys(userOwnObject).length > 0) { //when userOwn object has data
         const myBalanceTable = $("<table class='table table-striped mx-3' id='my-balance-table'></table>");

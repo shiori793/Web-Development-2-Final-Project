@@ -11,10 +11,10 @@
 // fetch current currency rate by setting base currency as user's main currency and get currency list
 // calculate all amount user own and user's profit and show on the page (pass the currency list in the response data to function)
 // show current currency rate list on the page
+
 // $( window ).load(function() {
     // Run code
 // });
-
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
@@ -29,7 +29,6 @@
 // function calculateProfit(userObject, currentRateList) {
 
 // }
-
 
 
 // parameter: Object including currency rate for user's main currency
@@ -48,8 +47,8 @@
         const exchangeRateItem = document.createElement('li');
         exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
         exchangeRateList.appendChild(exchangeRateItem);
-        }
-        document.body.appendChild(exchangeRateList);
+      }
+      document.body.appendChild(exchangeRateList);
     })
     .catch(error => console.error('Error fetching exchange rates:', error));
     }
@@ -58,6 +57,107 @@
 //Chart.js
     async function showGraph(date_from, currency, base_currency) {
   // Get date
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = `${now.getMonth() + 1}`.padStart(2, 0);
+  const day = `${now.getDate() - 1}`.padStart(2, 0);
+  date_to = `${year}-${month}-${day}`;
+
+  const pastDate = new Date(
+    today.getFullYear() - yearsToSubtract,
+    today.getMonth() - monthsToSubtract,
+    today.getDate() - daysToSubtract
+  );
+
+  const date_to = `${year}-${month}-${day}`;
+  const date_from = pastDate.toISOString().slice(0, 10);
+
+  //  ---------------------------------------------  //
+
+  // API
+  const key = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
+  const url = `https://api.freecurrencyapi.com/v1/historical?apikey=${key}&date_from=${date_from}&date_to=${date_to}&base_currency=${base_currency}&currencies=${currency}`;
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const labels = []; // Rate
+  const datas = []; // Date
+  const apiDatas = data.data;
+  const length = Object.keys(apiDatas).length;
+
+  //1week & 1month
+  if (length < 80) {
+    for (const key in apiDatas) {
+      if (apiDatas.hasOwnProperty(key)) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+    }
+    showGraph(labels, datas);
+    //3month
+  } else if (length >= 80 && length < 100) {
+    let i = 0;
+    for (let key in apiDatas) {
+      if (i % 3 === 0) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+      i++;
+    }
+    showGraph(labels, datas);
+    //6month
+  } else if (length >= 100 && length < 200) {
+    let i = 0;
+    for (let key in apiDatas) {
+      if (i % 7 === 0) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+      i++;
+    }
+    showGraph(labels, datas);
+    //1year
+  } else if (length >= 200 && length > 400) {
+    let i = 0;
+    for (let key in apiDatas) {
+      if (i % 30 === 0) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+      i++;
+    }
+    console.log(labels, datas);
+    showGraph(labels, datas);
+    //3year
+  } else if (length >= 400 && length < 1100) {
+    let i = 0;
+    for (let key in apiDatas) {
+      if (i % 60 === 0) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+      i++;
+    }
+    showGraph(labels, datas);
+    //5year
+  } else if (length >= 1100) {
+    let i = 0;
+    for (let key in apiDatas) {
+      if (i % 90 === 0) {
+        labels.push(key);
+        datas.push(Object.values(apiDatas[key])[0]);
+      }
+      i++;
+    }
+    showGraph(labels, datas);
+  }
+}
+getAPI();
+
+//  ------------------------------ Chart --------------------------------  //
+function showGraph(labels, datas) {
+  const ctx = document.getElementById("chart");
+  const rateChart = new Chart(ctx, {
     const now = new Date();
     const year = now.getFullYear();
     const month = `${now.getMonth() + 1}`.padStart(2, 0);
@@ -107,8 +207,43 @@
     //   },
     // },
   });
+
+  // Click to change the time span
+  $(".btn-1w").click(() => {
+    rateChart.destroy();
+    getAPI(0, 0, 7, "CAD", "USD");
+  });
+
+  $(".btn-1m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 1, 0, "CAD", "USD");
+  });
+
+  $(".btn-3m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 3, 0, "CAD", "USD");
+  });
+
+  $(".btn-6m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 6, 0, "CAD", "USD");
+  });
+
+  $(".btn-1y").click(() => {
+    rateChart.destroy();
+    getAPI(1, 0, 0, "CAD", "USD");
+  });
+
+  $(".btn-3y").click(() => {
+    rateChart.destroy();
+    getAPI(3, 0, 0, "CAD", "USD");
+  });
+
+  $(".btn-5y").click(() => {
+    rateChart.destroy();
+    getAPI(5, 0, 0, "CAD", "USD");
+  });
 }
-showGraph();
 
 //ロードした時はデフォルトでUSD（今年分表示）
 //各通貨を選択した場合、getGraphの引数currencyに通貨の名前を渡して関数を呼ぶ（今年分）
