@@ -5,16 +5,16 @@ $( window ).on('load', async function() {
     // test data
     sessionStorage.removeItem("user_id");
     sessionStorage.setItem("user_id", "user_id");
-    localStorage.clear();
-    localStorage.setItem(
-        'user_id', JSON.stringify({
-            mainCurrency: 'CAD',
-            userOwn: {
-                USD: 100,
-                CAD: 100
-            }
-        })
-    );
+    // localStorage.clear();
+    // localStorage.setItem(
+    //     'user_id', JSON.stringify({
+    //         mainCurrency: 'CAD',
+    //         userOwn: {
+    //             USD: 1000,
+    //             CAD: 1000
+    //         }
+    //     })
+    // );
 
     const user_id = sessionStorage.getItem("user_id");
     if (!user_id) { // when session does'nt have user id
@@ -340,12 +340,15 @@ $( window ).on('load', async function() {
     }
 })
 
+// get current rate from API
+// calculate bit and ask rate with 0.5% spread
+// return array of bitRate and askRate for base currency
 async function getBitAndAskValue(baseCurrency, changeCurrency) {
   if (baseCurrency != changeCurrency) {
     const rowValue = await calculateCurrency(baseCurrency, changeCurrency, 1);
     const spread = 0.5 / 100;
-    const bitRate = (rowValue * (1 - spread)).toFixed(4);
-    const askRate = (rowValue * (1 + spread)).toFixed(4);
+    const bitRate = rowValue * (1 - spread);
+    const askRate = rowValue * (1 + spread);
     return [bitRate, askRate];
   } else {
     return [1.000, 1.000];
@@ -361,8 +364,8 @@ $('.currency-select').on('change', async function (e) {
 // update the value in trade buttons
 async function updateBitAndAskValue() { 
   const currencyRates = await getBitAndAskValue($('#base-currency-select').val(), $('#change-currency-select').val());
-  $('#bit-rate').text(currencyRates[0]);
-  $('#ask-rate').text(currencyRates[1]);
+  $('#bit-rate').text(currencyRates[0].toFixed(4));
+  $('#ask-rate').text(currencyRates[1].toFixed(4));
 }
 
 // this function is executed when user entered the value user want to buy or sell
@@ -381,44 +384,71 @@ async function calculateCurrency(fromCurrency, toCurrency, amount) {
 }
 
 // check user's amount and trade (buy and sell) currency
-// async function trade(user_id) {
-//     let user_data = JSON.parse(localStorage.getItem(user_id));
-//     const baseCurrency = $('#base-currency-select').val();
-//     const baseAmount = $('#base-currency-input').val();
-//     const changeCurrency = $('#change-currency-select').val();
-//     if (!user_data.userOwn) {
-//         alert("Insufficient balance");
-//         return false;
-//     } else {
-//         if(user_data.userOwn.hasOwnProperty(baseCurrency) && user_data.userOwn[baseCurrency] >= baseAmount) {
-//             const changeAmount = await calculateCurrency(baseCurrency, changeCurrency, baseAmount);
-//             user_data.userOwn[baseCurrency] -= baseAmount;
-//             if (user_data.userOwn.hasOwnProperty(changeCurrency)) {
-//                 user_data.userOwn[changeCurrency] += changeAmount;
-//             } else {
-//                 user_data.userOwn[changeCurrency] = changeAmount;
-//             }
-//             console.log(user_data);
-//             localStorage.setItem(user_id, JSON.stringify(user_data));
-//             return true;
-//         } else {
-//             alert("Insufficient balance");
-//             return false;
-//         }
-//     }
-// }
+async function trade(user_id, type) {
+    let user_data = JSON.parse(localStorage.getItem(user_id));
+    const baseCurrency = $('#base-currency-select').val();
+    const lot = $('#lot-input').val();
+    const baseAmount = lot * 10000;
+    const changeCurrency = $('#change-currency-select').val();
+    if (!user_data.userOwn) {
+        alert("Insufficient balance");
+        return false;
+    } else {
+      const currencyRates = await getBitAndAskValue(baseCurrency, changeCurrency);
+      switch(type){
+        case 'BIT':
+          if(user_data.userOwn.hasOwnProperty(baseCurrency)) {
+            const changeAmount = baseAmount * currencyRates[0];
+            if (user_data.userOwn[baseCurrency] >= baseAmount) {
+              user_data.userOwn[baseCurrency] -= baseAmount
+              if(user_data.userOwn.hasOwnProperty(changeCurrency)) {
+                user_data.userOwn[changeCurrency] += changeAmount;
+              } else {
+                user_data.userOwn[changeCurrency] = changeAmount;
+              }
+              localStorage.setItem(user_id, JSON.stringify(user_data));
+              return true;
+            } else {
+              alert("Insufficient balance");
+              return false;
+            }
+          }
+          break;
+        case 'ASK':
+          if(user_data.userOwn.hasOwnProperty(changeCurrency)) {
+            const changeAmount = baseAmount * currencyRates[1];
+            if (user_data.userOwn[changeCurrency] >= changeAmount) {
+              user_data.userOwn[changeCurrency] -= changeAmount
+              if(user_data.userOwn.hasOwnProperty(baseCurrency)) {
+                user_data.userOwn[baseCurrency] += baseAmount;
+              } else {
+                user_data.userOwn[baseCurrency] = baseAmount;
+              }
+              localStorage.setItem(user_id, JSON.stringify(user_data));
+              return true;
+            } else {
+              alert("Insufficient balance");
+              return false;
+            }
+          }
+          break;
+      }
+      alert("Insufficient balance");
+      return false;
+    }
+}
 
 // trade is executed when buy or sell button is clicked
-// $('.trade-button').on('click', async function () {
-//     const user_id = sessionStorage.getItem("user_id");
-//     if (!user_id) { // when session does'nt have user id
-//         alert("Sorry, this is invalid session. Please login.");
-//     } else {
-//         if (await trade(user_id)) {
-//             $(location).attr('href', '../trade.html');
-//         }
-//     }
-// });
+$('.trade-button').on('click', async function () {
+    const user_id = sessionStorage.getItem("user_id");
+    if (!user_id) { // when session does'nt have user id
+        alert("Sorry, this is invalid session. Please login.");
+    } else {
+        if (await trade(user_id, $(this).val())) {
+          $(location).attr('href', '../trade_update.html');
+        }
+    }
+});
 
 // list up user's all currency and amount based on parameter object
 function showMyCurrencyList(userOwnObject) {
@@ -431,7 +461,7 @@ function showMyCurrencyList(userOwnObject) {
             let eachData = `
                 <tr>
                     <th scope="row">${key}</th>
-                    <td>${userOwnObject[key]}</td>
+                    <td>${userOwnObject[key].toFixed(4)}</td>
                 </tr>`;
             tbody.append(eachData);
         }
@@ -453,8 +483,8 @@ function createSelectCurrencyList(currencyList, user_data) {
         $('#base-currency-select').append(elem);
         $('#change-currency-select').append(elem.clone());
     });
-    $('#base-currency-select').val(user_data.mainCurrency);
-    $('#change-currency-select').val(user_data.mainCurrency != 'USD' ? 'USD' : 'CAD');
+    $('#change-currency-select').val(user_data.mainCurrency);
+    $('#base-currency-select').val(user_data.mainCurrency != 'USD' ? 'USD' : 'CAD');
 }
 
 // get all currency list from API

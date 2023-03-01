@@ -18,7 +18,6 @@
 		<link href="./css/trade.css" rel="stylesheet" />
 	</head>
 	<body>
-
 		<header>
 			<nav class="navbar navbar-expand-lg bg-light">
 				<div class="container-fluid">
@@ -93,8 +92,7 @@
 					<h1>Trade Now</h1>
 					<div class="container d-flex flex-column align-items-center">
 						<div class="input-group mb-3 mt-3 base-currency">
-							<select class="form-select" id="base-currency-select">
-							</select>
+							<select class="form-select" id="base-currency-select"></select>
 							<div class="form-floating w-50">
 								<input
 									type="number"
@@ -110,8 +108,7 @@
 						</div>
 						<i class="fa-solid fa-arrow-down mb-3"></i>
 						<div class="input-group mb-5 for-currency">
-							<select class="form-select" id="change-currency-select">
-							</select>
+							<select class="form-select" id="change-currency-select"></select>
 							<div class="form-floating w-50">
 								<input
 									type="number"
@@ -126,8 +123,22 @@
 						</div>
 					</div>
 					<div class="trade-buttons d-flex justify-content-evenly">
-						<button type="" class="btn btn-primary w-50 me-1 trade-button" value="BUY" id="buy-button">BUY</button>
-						<button type="" class="btn btn-danger w-50 ms-1 trade-button" value="SELL" id="sell-button">SELL</button>
+						<button
+							type=""
+							class="btn btn-primary w-50 me-1 trade-button"
+							value="BUY"
+							id="buy-button"
+						>
+							BUY
+						</button>
+						<button
+							type=""
+							class="btn btn-danger w-50 ms-1 trade-button"
+							value="SELL"
+							id="sell-button"
+						>
+							SELL
+						</button>
 					</div>
 				</div>
 			</div>
@@ -158,5 +169,6 @@
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 			crossorigin="anonymous"
 		></script>
+		<script src="./js/trade.js"></script>
 	</body>
 </html>
