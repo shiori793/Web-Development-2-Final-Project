@@ -42,13 +42,12 @@
     .then(response => response.json())
     .then(data => {
         const exchangeRates = data.data;
-        const exchangeRateList = document.createElement('ul');
+        const listArea = document.querySelector(".rateList");
         for (const item in exchangeRates) {
         const exchangeRateItem = document.createElement('li');
         exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
-        exchangeRateList.appendChild(exchangeRateItem);
-      }
-      document.body.appendChild(exchangeRateList);
+        listArea.appendChild(exchangeRateItem);
+        }
     })
     .catch(error => console.error('Error fetching exchange rates:', error));
     }
