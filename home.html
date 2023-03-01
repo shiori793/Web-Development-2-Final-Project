@@ -15,7 +15,7 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<script src="js/home.js"></script>
+		<script src="./js/home.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link href="./css/home.css" rel="stylesheet" />
 	</head>
@@ -34,7 +34,7 @@
 
 		<main>
 			<div class="totalAmounts">
-				<i class="fa-solid fa-coins"></i>
+				<i class="fa-solid fa-coins deposit"></i>
 				<div class="moneySaved">
 					<p class="words">MONEY SAVED</p>
 					<p class="price">CAD 100,000.00</p>
@@ -54,6 +54,15 @@
 							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 				</div>
 			</div>
+
+			<div class="overlay"></div>
+			<div class="depositModal">
+				<i class="fa-solid fa-xmark closeModal"></i>
+				<div class="modalContent">
+					<h2>Deposit Money</h2>
+					<input class="inputDeposit"type="text">
+					<button type="button" class="btn btn-dark">Deposit</button>
+				</div>
 		</main>
 
     <footer>

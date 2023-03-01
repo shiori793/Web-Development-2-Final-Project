@@ -12,9 +12,22 @@
 // calculate all amount user own and user's profit and show on the page (pass the currency list in the response data to function)
 // show current currency rate list on the page
 
-// $( window ).load(function() {
-// Run code
-// });
+window.onload = function() {
+  //  ----------------- Deposit Modal -----------------  //
+  const deposit = document.querySelector(".deposit");
+  const depositModal = document.querySelector(".depositModal");
+  const closeModal = document.querySelector(".closeModal");
+  const overlay = document.querySelector(".overlay");
+  
+  deposit.addEventListener("click", () => {
+    depositModal.classList.add("active");
+    overlay.classList.add("active");
+  });
+  closeModal.addEventListener("click", () => {
+    depositModal.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+};
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
@@ -30,11 +43,12 @@
 
 // }
 
+
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-    async function showCurrencyRateList(){
+    function showCurrencyRateList(){
     const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-    // const baseCurrency = mainCurrency;
+    const baseCurrency = 'CAD';
     const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
     fetch(apiURL)
@@ -44,13 +58,13 @@
         const listArea = document.querySelector(".rateList");
         for (const item in exchangeRates) {
         const exchangeRateItem = document.createElement('li');
-        exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
+        exchangeRateItem.textContent = `${baseCurrency} / ${item} ${exchangeRates[item]}`;
         listArea.appendChild(exchangeRateItem);
         }
     })
-    .catch((error) => console.error("Error fetching exchange rates:", error));
-}
-showCurrencyRateList();
+    .catch(error => console.error('Error fetching exchange rates:', error));
+    }
+    showCurrencyRateList();
 
 //Chart.js
 
