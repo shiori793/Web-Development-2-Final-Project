@@ -31,40 +31,34 @@ function showCurrencyRateList(currencyListObject) {}
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-// function showCurrencyRateList(currencyListObject) {
-//   const apiURL =
-//     "https://api.freecurrencyapi.com/v1/latest?apikey=h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
+function showCurrencyRateList(currencyListObject) {
+  const apiURL =
+    "https://api.freecurrencyapi.com/v1/latest?apikey=h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
 
-//   fetch(apiURL)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // console.log(data);
-//       const exchangeRates = data;
-//       const exchangeRateList = document.createElement("ul");
-//       for (let i = 0; i < exchangeRates.length; i++) {
-//         const exchangeRateItem = document.createElement("li");
-//         exchangeRateItem.textContent = `${exchangeRates}`;
-//         exchangeRateList.appendChild(exchangeRateItem);
-//       }
-//       document.body.appendChild(exchangeRateList);
-//     })
-//     .catch((error) => console.error("Error fetching exchange rates:", error));
-// }
+  fetch(apiURL)
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data);
+      const exchangeRates = data;
+      const exchangeRateList = document.createElement("ul");
+      for (let i = 0; i < exchangeRates.length; i++) {
+        const exchangeRateItem = document.createElement("li");
+        exchangeRateItem.textContent = `${exchangeRates}`;
+        exchangeRateList.appendChild(exchangeRateItem);
+      }
+      document.body.appendChild(exchangeRateList);
+    })
+    .catch((error) => console.error("Error fetching exchange rates:", error));
+}
 
 //Chart.js
-
-async function getAPI(
-  yearsToSubtract = 0,
-  monthsToSubtract = 0,
-  daysToSubtract = 7,
-  base_currency = "CAD",
-  currency = "USD"
-) {
-  //  ------------------ Get date ------------------  //
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = `${today.getMonth() + 1}`.padStart(2, 0);
-  const day = `${today.getDate() - 1}`.padStart(2, 0);
+async function showGraph(date_from, currency, base_currency) {
+  // Get date
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = `${now.getMonth() + 1}`.padStart(2, 0);
+  const day = `${now.getDate() - 1}`.padStart(2, 0);
+  date_to = `${year}-${month}-${day}`;
 
   const pastDate = new Date(
     today.getFullYear() - yearsToSubtract,
