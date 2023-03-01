@@ -13,6 +13,7 @@
 // show current currency rate list on the page
 
 window.onload = function() {
+  //  ------------------ Deposit Modal ------------------  //
   const deposit = document.querySelector(".deposit");
   const depositModal = document.querySelector(".depositModal");
   const closeModal = document.querySelector(".closeModal");
@@ -27,20 +28,6 @@ window.onload = function() {
     overlay.classList.remove("active");
   });
 };
-
-//  ------------------ Deposit Modal ------------------  //
-// function showModal(){
-//   const modal = document.getElementById("depositModal");
-//   const overlay = document.getElementById("overlay");
-//   modal.classList.add("active");
-//   overlay.classList.add("active");
-// }
-// function hideModal(){
-//   const modal = document.getElementById("depositModal");
-//   const overlay = document.getElementById("overlay");
-//   modal.classList.remove("active");
-//   overlay.classList.remove("active");
-// }
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
@@ -61,7 +48,7 @@ window.onload = function() {
 // add list object to home.html
     function showCurrencyRateList(){
     const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-    // const baseCurrency = mainCurrency;
+    const baseCurrency = 'CAD';
     const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
     fetch(apiURL)
@@ -71,7 +58,7 @@ window.onload = function() {
         const listArea = document.querySelector(".rateList");
         for (const item in exchangeRates) {
         const exchangeRateItem = document.createElement('li');
-        exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
+        exchangeRateItem.textContent = `${baseCurrency} / ${item} ${exchangeRates[item]}`;
         listArea.appendChild(exchangeRateItem);
         }
     })
@@ -186,20 +173,20 @@ async function getAPI(
 getAPI();
 
 //  ------------------------------ Chart --------------------------------  //
-// function showGraph(labels, datas) {
-//   const ctx = document.getElementById("chart");
-//   const rateChart = new Chart(ctx, {
-//     type: "line",
-//     data: {
-//       labels: labels,
-//       datasets: [
-//         {
-//           label: "Rate",
-//           data: datas,
-//           borderWidth: 1,
-//         },
-//       ],
-//     },
+function showGraph(labels, datas) {
+  const ctx = document.getElementById("chart");
+  const rateChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Rate",
+          data: datas,
+          borderWidth: 1,
+        },
+      ],
+    },
     // options: {
     //   scales: {
     //     y: {
@@ -207,61 +194,47 @@ getAPI();
     //     },
     //   },
     // },
-  // });
+  });
 
   // Click to change the time span
-  // $(".btn-1w").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(0, 0, 7, "CAD", "USD");
-  // });
+  $(".btn-1w").click(() => {
+    rateChart.destroy();
+    getAPI(0, 0, 7, "CAD", "USD");
+  });
 
-  // $(".btn-1m").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(0, 1, 0, "CAD", "USD");
-  // });
+  $(".btn-1m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 1, 0, "CAD", "USD");
+  });
 
-  // $(".btn-3m").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(0, 3, 0, "CAD", "USD");
-  // });
+  $(".btn-3m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 3, 0, "CAD", "USD");
+  });
 
-  // $(".btn-6m").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(0, 6, 0, "CAD", "USD");
-  // });
+  $(".btn-6m").click(() => {
+    rateChart.destroy();
+    getAPI(0, 6, 0, "CAD", "USD");
+  });
 
-  // $(".btn-1y").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(1, 0, 0, "CAD", "USD");
-  // });
+  $(".btn-1y").click(() => {
+    rateChart.destroy();
+    getAPI(1, 0, 0, "CAD", "USD");
+  });
 
-  // $(".btn-3y").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(3, 0, 0, "CAD", "USD");
-  // });
+  $(".btn-3y").click(() => {
+    rateChart.destroy();
+    getAPI(3, 0, 0, "CAD", "USD");
+  });
 
-  // $(".btn-5y").click(() => {
-  //   rateChart.destroy();
-  //   getAPI(5, 0, 0, "CAD", "USD");
-  // });
-// }
+  $(".btn-5y").click(() => {
+    rateChart.destroy();
+    getAPI(5, 0, 0, "CAD", "USD");
+  });
+}
 
 //ロードした時はデフォルトでUSD（今年分表示）
 //各通貨を選択した場合、getGraphの引数currencyに通貨の名前を渡して関数を呼ぶ（今年分）
 //期間を選択する場合　１週間、１ヶ月、３ヶ月、半年、1年、2年、3年、5年、10年
 //getGraphの引数date_fromに今日から逆算した日にちを渡して関数を呼ぶ
 //x軸とy軸の表示について考える
-
-// const deposit = document.querySelector(".deposit");
-// const depositModal = document.querySelector(".depositModal");
-// const closeModal = document.querySelector(".closeModal");
-// const overlay = document.querySelector(".overlay");
-
-// deposit.addEventListener("click", () => {
-//   depositModal.classList.add("active");
-//   overlay.classList.add("active");
-// });
-// closeModal.addEventListener("click", () => {
-//   depositModal.classList.remove("active");
-//   overlay.classList.remove("active");
-// });
