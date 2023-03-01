@@ -16,6 +16,13 @@
 			crossorigin="anonymous"
 		></script>
 		<link href="./css/trade.css" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+			integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 	</head>
 	<body>
 		<header>
@@ -91,53 +98,36 @@
 				>
 					<h1>Trade Now</h1>
 					<div class="container d-flex flex-column align-items-center">
-						<div class="input-group mb-3 mt-3 base-currency">
-							<select class="form-select" id="base-currency-select"></select>
-							<div class="form-floating w-50">
-								<input
-									type="number"
-									class="form-control"
-									aria-label="Text input with dropdown button"
-									id="base-currency-input"
-									placeholder="100"
-									min="1"
-									required
-								/>
-								<label for="base-currency-input">Amount</label>
-							</div>
+						<div class="input-group mb-3 mt-3 currency align-items-center">
+							<select class="form-select currency-select" id="base-currency-select">
+							</select>
+							<h4>&#47</h4>
+							<select class="form-select currency-select" id="change-currency-select">
+							</select>
 						</div>
-						<i class="fa-solid fa-arrow-down mb-3"></i>
-						<div class="input-group mb-5 for-currency">
-							<select class="form-select" id="change-currency-select"></select>
+						<div class="input-group mb-5 lot">
 							<div class="form-floating w-50">
 								<input
 									type="number"
 									class="form-control"
 									aria-label="Text input with dropdown button"
-									id="change-currency-input"
+									id="lot-input"
 									placeholder="100"
-									min="1"
+									min="0.1"
+									max="100"
 								/>
-								<label for="change-currency-input">Amount</label>
+								<label for="change-currency-input">Lot (1 Lot = 10000 currency)</label>
 							</div>
 						</div>
 					</div>
 					<div class="trade-buttons d-flex justify-content-evenly">
-						<button
-							type=""
-							class="btn btn-primary w-50 me-1 trade-button"
-							value="BUY"
-							id="buy-button"
-						>
-							BUY
+						<button type="" class="btn btn-primary w-50 me-1 trade-button" value="BIT" id="buy-button">
+							Bit
+							<h4 id="bit-rate"></d>
 						</button>
-						<button
-							type=""
-							class="btn btn-danger w-50 ms-1 trade-button"
-							value="SELL"
-							id="sell-button"
-						>
-							SELL
+						<button type="" class="btn btn-danger w-50 ms-1 trade-button" value="ASK" id="sell-button">
+							Ask
+							<h4 id="ask-rate"></h4>
 						</button>
 					</div>
 				</div>
@@ -169,6 +159,6 @@
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 			crossorigin="anonymous"
 		></script>
-		<script src="./js/trade.js"></script>
+		<script src="./js/trade_update.js"></script>
 	</body>
 </html>
