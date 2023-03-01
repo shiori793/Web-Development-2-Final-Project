@@ -3,18 +3,18 @@
 $( window ).on('load', function() {
 
         // test data
-        sessionStorage.removeItem("user_id");
-        sessionStorage.setItem("user_id", "user_id");
-        localStorage.clear();
-        localStorage.setItem(
-            'user_id', JSON.stringify({
-                mainCurrency: 'CAD',
-                userOwn: {
-                    USD: 100,
-                    CAD: 100
-                }
-            })
-        );
+        // sessionStorage.removeItem("user_id");
+        // sessionStorage.setItem("user_id", "user_id");
+        // localStorage.clear();
+        // localStorage.setItem(
+        //     'user_id', JSON.stringify({
+        //         mainCurrency: 'CAD',
+        //         userOwn: {
+        //             USD: 100,
+        //             CAD: 100
+        //         }
+        //     })
+        // );
 
     const user_id = sessionStorage.getItem("user_id");
     if (!user_id) { // when session does'nt have user id
@@ -350,7 +350,7 @@ async function calculateCurrency(fromCurrency, toCurrency, amount) {
     } else {
         const responseJson = await response.json();
         const currentRate = responseJson.data[toCurrency];
-        return amount * currentRate;
+        return (amount * currentRate);
     }
 }
 
@@ -397,7 +397,6 @@ $('.trade-button').on('click', async function () {
 
 // list up user's all currency and amount based on parameter object
 function showMyCurrencyList(userOwnObject) {
-
     $('#my-balance-table').remove();
     if(Object.keys(userOwnObject).length > 0) { //when userOwn object has data
         const myBalanceTable = $("<table class='table table-striped mx-3' id='my-balance-table'></table>");
@@ -407,7 +406,7 @@ function showMyCurrencyList(userOwnObject) {
             let eachData = `
                 <tr>
                     <th scope="row">${key}</th>
-                    <td>${userOwnObject[key]}</td>
+                    <td>${userOwnObject[key].toFixed(4)}</td>
                 </tr>`;
             tbody.append(eachData);
         }
