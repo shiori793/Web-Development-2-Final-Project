@@ -13,9 +13,26 @@
 // show current currency rate list on the page
 
 window.addEventListener("load", function () {
+  // When the page load, call functions to show rate lists and chart
   showCurrencyRateList();
   getAPI();
+ 
+  //  ----------------- Deposit Modal -----------------  //
+  const deposit = document.querySelector(".deposit");
+  const depositModal = document.querySelector(".depositModal");
+  const closeModal = document.querySelector(".closeModal");
+  const overlay = document.querySelector(".overlay");
+  
+  deposit.addEventListener("click", () => {
+    depositModal.classList.add("active");
+    overlay.classList.add("active");
+  });
+  closeModal.addEventListener("click", () => {
+    depositModal.classList.remove("active");
+    overlay.classList.remove("active");
+  });
 });
+
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
@@ -30,15 +47,17 @@ window.addEventListener("load", function () {
 // function calculateProfit(userObject, currentRateList) {
 
 // }
-const key = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
+const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
 let currency = ""; // Change the value everytime user choose a different currency
+
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-async function showCurrencyRateList() {
+
+function showCurrencyRateList() {
   // const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-  // const baseCurrency = mainCurrency;
-  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${key}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
+  const baseCurrency = 'CAD';
+  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${aipKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
   fetch(apiURL)
     .then((response) => response.json())
@@ -48,12 +67,12 @@ async function showCurrencyRateList() {
       for (const item in exchangeRates) {
         const exchangeRateItem = document.createElement("li");
         exchangeRateItem.className = `currencyList ${item}`;
-        exchangeRateItem.textContent = `${item} ${exchangeRates[item]}`;
+        exchangeRateItem.textContent = `${baseCurrency} / ${item} ${exchangeRates[item]}`;
         listArea.appendChild(exchangeRateItem);
       }
     })
-    .catch((error) => console.error("Error fetching exchange rates:", error));
-}
+    .catch(error => console.error('Error fetching exchange rates:', error));
+    }
 
 //Chart.js
 async function getAPI(
