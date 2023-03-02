@@ -74,16 +74,54 @@ $(window).on("load", async function () {
     depositModal.classList.remove("active");
     overlay.classList.remove("active");
   });
-  //  ------------------------------------------------  //
-});
+
+  //  ----------------- Deposit Function -----------------  //
+  showDeposit();
+
+  // Save deposit data
+  document.getElementById("deposit").onclick = function saveDeposit() {
+    const userInput = document.getElementById("inputDeposit").value;
+    console.log(`userInput = ${userInput}`);
+    localStorage.setItem(`userInput`, userInput);
+    showDeposit();
+  }
+
+  //Get deposit data
+  // const depositStorage = localStorage.getItem(`userInput`);
+  // console.log(`depositStorage = ${depositStorage}`);
+
+  //Show deposit data
+  function showDeposit() {
+    const depositStorage = localStorage.getItem(`userInput`);
+    console.log(`depositStorage = ${depositStorage}`);
+    if (depositStorage) {
+      document.getElementsByClassName("moneySavedPrice")[0].textContent = depositStorage;
+    } else {
+      document.getElementsByClassName("moneySavedPrice")[0].innerHTML = "No Data";
+    }
+  }
+} 
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
 // return sum of all values
+
 function calculateAmount(userAmount, mainCurrency, currentRateList) {
   const moneySavedAmount = document.querySelector(".??");
   moneySavedAmount.innerHTML = `${mainCurrency} ${userAmount}`;
 }
+
+function calculateAmount(userAmount, mainCurrency, currentRateList) {}
+// function calculateAmount(userAmount, mainCurrency, currentRateList) {
+
+// }
+//  ----------------- Deposit Function -----------------  //
+// document.getElementById("deposit").onclick = function saveDeposit() {
+//   const depositData = document.getElementById("inputDeposit").value;
+//   console.log(`depositData = ${depositData}`);
+//   localStorage.setItem(`depositData`, depositData);
+// }
+
 
 // parameter: userObject
 // calculate sum value of user input (localStorage) and user own (localStorage) in main currency
