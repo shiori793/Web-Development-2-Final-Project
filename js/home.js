@@ -55,6 +55,7 @@ $(window).on("load", async function () {
       if (user_data.hasOwnProperty("userOwn")) {
         calculateAmount(userAmount, mainCurrency);
         // calculateProfit(user_data,?????);
+        deposit(userAmount);
       } else {
       }
     }
@@ -76,28 +77,32 @@ $(window).on("load", async function () {
   });
 
   //  ----------------- Deposit Function -----------------  //
-  showDeposit();
-
+  // showDeposit();
+  
   // Save deposit data
+  function deposit(userAmount){
   document.getElementById("deposit").onclick = function saveDeposit() {
-    const userInput = document.getElementById("inputDeposit").value;
-    console.log(`userInput = ${userInput}`);
-    localStorage.setItem(`userInput`, userInput);
+    const depositInput = document.getElementById("inputDeposit").value;
+    console.log(`depositInput = ${depositInput}`);
+    const totalMoneySaved = userAmount + depositInput;
+
+    localStorage.setItem(`userInput`, depositInput);
+    localStorage.setItem(`userOwn`, depositInput);
     depositModal.classList.remove("active");
     overlay.classList.remove("active");
-    showDeposit();
-  }
+    // showDeposit();
+  }}
 
   //Show deposit data
-  function showDeposit() {
-    const depositStorage = localStorage.getItem(`userInput`);
-    console.log(`depositStorage = ${depositStorage}`);
-    if (depositStorage) {
-      document.getElementsByClassName("moneySavedPrice")[0].textContent = depositStorage;
-    } else {
-      document.getElementsByClassName("moneySavedPrice")[0].innerHTML = "No Data";
-    }
-  }
+  // function showDeposit() {
+  //   const depositStorage = localStorage.getItem(`userInput`);
+  //   console.log(`depositStorage = ${depositStorage}`);
+  //   if (depositStorage) {
+  //     document.getElementsByClassName("moneySavedPrice")[0].textContent = depositStorage;
+  //   } else {
+  //     document.getElementsByClassName("moneySavedPrice")[0].innerHTML = "No Data";
+  //   }
+  // }
 })
 
 // parameter: userAmount object (userInput, userOwn), main currency
@@ -105,11 +110,11 @@ $(window).on("load", async function () {
 // return sum of all values
 
 function calculateAmount(userAmount, mainCurrency, currentRateList) {
-  const moneySavedAmount = document.querySelector(".??");
+  const moneySavedAmount = document.querySelector(".moneySavedPrice");
   moneySavedAmount.innerHTML = `${mainCurrency} ${userAmount}`;
 }
 
-function calculateAmount(userAmount, mainCurrency, currentRateList) {}
+// function calculateAmount(userAmount, mainCurrency, currentRateList) {}
 // function calculateAmount(userAmount, mainCurrency, currentRateList) {
 
 // }
