@@ -1,21 +1,60 @@
-// URL to get all currency name
-// https://api.freecurrencyapi.com/v1/currencies?apikey=<API_KEY>
+// fetch current currency rate by setting base currency as user's main currency and get currency list //NAMI
 
-// URL to get all currency rate
-//api.freecurrencyapi.com/v1/latest?apikey=<API_KEY>&base_currency=<BASE_CURRENY>
+// calculate all amount user own and user's profit and show on the page (pass the currency list in the response data to function) //WORKING ON
 
-// URL to get selected currency rate
-// https://api.freecurrencyapi.com/v1/latest?apikey=<API_KEY>&currencies=<SELECTED_CURRENCY>%2C<SELECTED_CURRENCY>%2C<SELECTED_CURRENCY>&base_currency=CAD
+$(window).on("load", async function () {
+  // ------------   test data   -------------- //
+  //sessionStorageのuser_idの値を削除しておく
+  sessionStorage.removeItem("user_id");
+  //sessionStorageにテスト用のuser_idを設定する
+  sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
 
-// get user id from session storage and search data from local storage
-// fetch current currency rate by setting base currency as user's main currency and get currency list
-// calculate all amount user own and user's profit and show on the page (pass the currency list in the response data to function)
-// show current currency rate list on the page
+  //localStorage内のすべてのデータを削除しておく
+  localStorage.clear();
 
-window.addEventListener("load", function () {
-  // When the page load, call functions to show rate lists and chart
-  showCurrencyRateList();
-  getAPI();
+  //localStorageにテスト用のデータを設定する
+  localStorage.setItem(
+    "user1",
+    JSON.stringify({
+      //JavaScriptオブジェクトをJSON文字列に変換
+      mainCurrency: "CAD",
+      userInput: {
+        CAD: 1000,
+      },
+      userOwn: {
+        CAD: 10000,
+      },
+    })
+  );
+  // ---------------------------------------- //
+
+  // ユーザーIDをセッションから取得
+  const user_id = sessionStorage.getItem("user_id");
+  // localStorageでデータを検索する
+  const userData = JSON.parse(localStorage.getItem(user_id));
+  // 取得したデータがuserDataに代入されている
+  console.log(userData);
+
+  if (!user_id) {
+    //user_idがないとき
+    $(".price").innerHTML = "Please login!";
+    alert("Sorry, this is invalid session. Please login.");
+  } else {
+    // あるとき
+    let user_data = JSON.parse(localStorage.getItem(user_id));
+    // When the page load, call functions to show rate lists and chart
+    showCurrencyRateList();
+    await getAPI();
+    if (!user_data) {
+      // when localStorage doesn't have user data
+      alert("Sorry, you don't have your account. Please register.");
+    } else {
+      if (user_data.hasOwnProperty("userOwn")) {
+        // check if userOwn object key exists
+      } else {
+      }
+    }
+  }
 
   //  ----------------- Deposit Modal -----------------  //
   const deposit = document.querySelector(".deposit");
@@ -31,14 +70,15 @@ window.addEventListener("load", function () {
     depositModal.classList.remove("active");
     overlay.classList.remove("active");
   });
+  //  ------------------------------------------------  //
 });
 
 // parameter: userAmount object (userInput, userOwn), main currency
-// convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
-// return sum of all values
-// function calculateAmount(userAmount, mainCurrency, currentRateList) {
 
-// }
+// convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
+
+// return sum of all values
+function calculateAmount(userAmount, mainCurrency, currentRateList) {}
 
 // parameter: userObject
 // calculate sum value of user input (localStorage) and user own (localStorage) in main currency
@@ -46,12 +86,12 @@ window.addEventListener("load", function () {
 // function calculateProfit(userObject, currentRateList) {
 
 // }
+
 const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
 let currency = ""; // Change the value everytime user choose a different currency
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-
 function showCurrencyRateList() {
   // const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
   const baseCurrency = "CAD";
