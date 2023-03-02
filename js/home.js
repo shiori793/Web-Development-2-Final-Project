@@ -6,7 +6,7 @@ $(window).on("load", async function () {
   // ------------   test data   -------------- //
   //sessionStorageのuser_idの値を削除しておく
   sessionStorage.removeItem("user_id");
-  //sessionStorageにテスト用のuser_idを設定する
+  //sessionStorageにテスト用のuser_id名、”user1”を設定する
   sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
 
   //localStorage内のすべてのデータを削除しておく
@@ -15,8 +15,8 @@ $(window).on("load", async function () {
   //localStorageにテスト用のデータを設定する
   localStorage.setItem(
     "user1",
+    //JavaScriptオブジェクトをJSON文字列に変換
     JSON.stringify({
-      //JavaScriptオブジェクトをJSON文字列に変換
       mainCurrency: "CAD",
       userInput: {
         CAD: 1000,
@@ -30,19 +30,22 @@ $(window).on("load", async function () {
 
   // ユーザーIDをセッションから取得
   const user_id = sessionStorage.getItem("user_id");
-  // localStorageでデータを検索する
-  const userData = JSON.parse(localStorage.getItem(user_id));
-  // 取得したデータがuserDataに代入されている
-  console.log(userData);
+  // JSON形式の文字列をJavaScriptに変換する
+  let user_data = JSON.parse(localStorage.getItem(user_id));
+  // 取得したデータがuser_dataに代入されている
+  console.log(user_data);
+
+  //localStorageからmainCurrency取得
+  const mainCurrency = user_data.mainCurrency;
+
+  //localStorageからmainCurrencyの金額を取得
+  const userAmount = Object.values(user_data.userOwn)[0];
 
   if (!user_id) {
-    //user_idがないとき
-    $(".price").innerHTML = "Please login!";
+    // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
   } else {
-    // あるとき
-    let user_data = JSON.parse(localStorage.getItem(user_id));
-    // When the page load, call functions to show rate lists and chart
+    // user_idがあるとき
     showCurrencyRateList();
     await getAPI();
     if (!user_data) {
@@ -50,7 +53,8 @@ $(window).on("load", async function () {
       alert("Sorry, you don't have your account. Please register.");
     } else {
       if (user_data.hasOwnProperty("userOwn")) {
-        // check if userOwn object key exists
+        calculateAmount(userAmount, mainCurrency);
+        // calculateProfit(user_data,?????);
       } else {
       }
     }
@@ -99,10 +103,14 @@ $(window).on("load", async function () {
 } 
 
 // parameter: userAmount object (userInput, userOwn), main currency
-
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
-
 // return sum of all values
+
+function calculateAmount(userAmount, mainCurrency, currentRateList) {
+  const moneySavedAmount = document.querySelector(".??");
+  moneySavedAmount.innerHTML = `${mainCurrency} ${userAmount}`;
+}
+
 function calculateAmount(userAmount, mainCurrency, currentRateList) {}
 // function calculateAmount(userAmount, mainCurrency, currentRateList) {
 
@@ -115,13 +123,10 @@ function calculateAmount(userAmount, mainCurrency, currentRateList) {}
 // }
 
 
-
 // parameter: userObject
 // calculate sum value of user input (localStorage) and user own (localStorage) in main currency
 // return difference between these values
-// function calculateProfit(userObject, currentRateList) {
-
-// }
+function calculateProfit(userObject, currentRateList) {}
 
 const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
 let currency = ""; // Change the value everytime user choose a different currency
