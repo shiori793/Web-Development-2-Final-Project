@@ -3,8 +3,8 @@
 $( window ).on('load', async function() {
 
     // test data
-    sessionStorage.removeItem("user_id");
-    sessionStorage.setItem("user_id", "user_id");
+    sessionStorage.removeItem("userID");
+    sessionStorage.setItem("userID", "user_id");
 
     localStorage.clear();
     localStorage.setItem(
@@ -18,7 +18,7 @@ $( window ).on('load', async function() {
         })
     );
 
-    const user_id = sessionStorage.getItem("user_id");
+    const user_id = sessionStorage.getItem("userID");
     if (!user_id) { // when session does'nt have user id
         $('#my-balance-table').remove();
         sessionError();
@@ -63,8 +63,8 @@ async function getBitAndAskValue(baseCurrency, changeCurrency) {
 
 // add event listener to input box change
 $('.currency-select').on('change', async function (e) { 
-    e.preventDefault();
     await updateBitAndAskValue();
+    e.preventDefault();
 });
 
 // update the value in trade buttons
@@ -208,7 +208,7 @@ async function trade(user_id, type) {
 
 // trade is executed when buy or sell button is clicked
 $('.trade-button').on('click', async function () {
-    const user_id = sessionStorage.getItem("user_id");
+    const user_id = sessionStorage.getItem("userID");
     if (!user_id) { // when session does'nt have user id
         sessionError();
     } else {
