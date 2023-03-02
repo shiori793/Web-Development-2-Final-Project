@@ -16,13 +16,13 @@ window.addEventListener("load", function () {
   // When the page load, call functions to show rate lists and chart
   showCurrencyRateList();
   getAPI();
- 
+
   //  ----------------- Deposit Modal -----------------  //
   const deposit = document.querySelector(".deposit");
   const depositModal = document.querySelector(".depositModal");
   const closeModal = document.querySelector(".closeModal");
   const overlay = document.querySelector(".overlay");
-  
+
   deposit.addEventListener("click", () => {
     depositModal.classList.add("active");
     overlay.classList.add("active");
@@ -32,7 +32,6 @@ window.addEventListener("load", function () {
     overlay.classList.remove("active");
   });
 });
-
 
 // parameter: userAmount object (userInput, userOwn), main currency
 // convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
@@ -50,14 +49,13 @@ window.addEventListener("load", function () {
 const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
 let currency = ""; // Change the value everytime user choose a different currency
 
-
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
 
 function showCurrencyRateList() {
   // const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-  const baseCurrency = 'CAD';
-  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${aipKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
+  const baseCurrency = "CAD";
+  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
 
   fetch(apiURL)
     .then((response) => response.json())
@@ -71,8 +69,8 @@ function showCurrencyRateList() {
         listArea.appendChild(exchangeRateItem);
       }
     })
-    .catch(error => console.error('Error fetching exchange rates:', error));
-    }
+    .catch((error) => console.error("Error fetching exchange rates:", error));
+}
 
 //Chart.js
 async function getAPI(
@@ -103,7 +101,7 @@ async function getAPI(
 
   // API
   // const key = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
-  const url = `https://api.freecurrencyapi.com/v1/historical?apikey=${key}&date_from=${date_from}&date_to=${date_to}&base_currency=${base_currency}&currencies=${target_currency}`;
+  const url = `https://api.freecurrencyapi.com/v1/historical?apikey=${apiKey}&date_from=${date_from}&date_to=${date_to}&base_currency=${base_currency}&currencies=${target_currency}`;
   const res = await fetch(url);
   const data = await res.json();
 
