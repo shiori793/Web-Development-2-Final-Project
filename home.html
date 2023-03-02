@@ -15,6 +15,11 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
 		<script src="./js/home.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link href="./css/home.css" rel="stylesheet" />
@@ -49,9 +54,13 @@
 					<ul class="rateList"></ul>
 				</div>
 				<div class="chart">
+          <p class="currency-name">CAD/USD</p>
+          <button type="button" class="btn btn-light btn-1w">1 Week</button>
+          <button type="button" class="btn btn-light btn-1m">1 Month</button>
+          <button type="button" class="btn btn-light btn-3m">3 Month</button>
+          <button type="button" class="btn btn-light btn-6m">6 Month</button>
 					<canvas id="chart" width="600" height="300" style="display: block; box-sizing: border-box; height: 400px; width: 800px;"></canvas>
-							<!-- <canvas id="chart"></canvas> -->
-							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 				</div>
 			</div>
 
@@ -64,7 +73,6 @@
 					<button type="button" class="btn btn-dark">Deposit</button>
 				</div>
 		</main>
-
     <footer>
       <!-- footer -->
     </footer>
