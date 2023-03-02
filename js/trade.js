@@ -3,20 +3,20 @@
 $( window ).on('load', async function() {
 
     // test data
-    // sessionStorage.removeItem("user_id");
-    // sessionStorage.setItem("user_id", "user_id");
+    sessionStorage.removeItem("user_id");
+    sessionStorage.setItem("user_id", "user_id");
 
-    // localStorage.clear();
-    // localStorage.setItem(
-    //     'user_id',
-    //     JSON.stringify({
-    //         mainCurrency: 'CAD',
-    //         userOwn: {
-    //             USD: 10000,
-    //             CAD: 10000
-    //         }
-    //     })
-    // );
+    localStorage.clear();
+    localStorage.setItem(
+        'user_id',
+        JSON.stringify({
+            mainCurrency: 'CAD',
+            userOwn: {
+                USD: 10000,
+                CAD: 10000
+            }
+        })
+    );
 
     const user_id = sessionStorage.getItem("user_id");
     if (!user_id) { // when session does'nt have user id
@@ -118,6 +118,7 @@ async function trade(user_id, type) {
             type: 'blue',
             autoClose: 'cancel|45000',
             columnClass: 'col-md-7',
+            icon: 'fa-solid fa-circle-exclamation',
             buttons: {
                 confirm: {
                     btnClass: 'btn-blue',
@@ -142,6 +143,7 @@ async function trade(user_id, type) {
                                             content: 'Your trade succeeded',
                                             type: 'green',
                                             typeAnimated: true,
+                                            icon: 'fa-solid fa-circle-check',
                                             buttons: {
                                                 close: function(){
                                                     $(location).attr('href', '../trade.html');
@@ -172,6 +174,7 @@ async function trade(user_id, type) {
                                             content: 'Your trade succeeded',
                                             type: 'green',
                                             typeAnimated: true,
+                                            icon: 'fa-solid fa-circle-check',
                                             buttons: {
                                                 close: function(){
                                                     $(location).attr('href', '../trade.html');
@@ -192,6 +195,7 @@ async function trade(user_id, type) {
                         content: 'Your trade is cancelled',
                         type: 'orange',
                         typeAnimated: true,
+                        icon: 'fa-solid fa-circle-xmark',
                         buttons: {
                             close: function(){}
                         }
