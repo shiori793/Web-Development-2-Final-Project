@@ -1,11 +1,12 @@
-
+$( window ).on('load', async function() {
 // User Constructor
 class newUser {
-    constructor(email, password, firstName, lastName) {
+    constructor(email, password, firstName, lastName, mainCurrency) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.mainCurrency = mainCurrency;
         // this.mainCurrency = mainCurrency;
     }
 }
@@ -17,12 +18,13 @@ $("#register").submit(function(event) {
     let password = $("#password").val();
     let firstName = $("#firstName").val();
     let lastName = $("#lastName").val();
+    let mainCurrency = $("#mainCurrency").val();
     // let mainCurrency = $("#")
     
     let checkEmail = localStorage.getItem(`${email}`);
     console.log(checkEmail);
     if (checkEmail === null) {
-       let User = new newUser(email, password, firstName, lastName);
+       let User = new newUser(email, password, firstName, lastName, mainCurrency);
        localStorage.setItem(`${email}`, JSON.stringify(User));
        let retrievedObject = localStorage.getItem(`${email}`);
        console.log(retrievedObject);
@@ -35,3 +37,30 @@ function validateEmail(email) {
     let regex = /^\S+@\S+\.\S+$/;
     return regex.test(email);
 }
+
+async function createSelectCurrencyList() {
+    const allCurrencies = await getAllCurrencies();
+    const currencyList = Object.keys(allCurrencies);
+    currencyList.forEach(currName => {
+        const elem = $("<option></option>");
+        elem.text(currName);
+        elem.val(currName);
+        $('#mainCurrency').append(elem);
+    });
+    $('#mainCurrency').val("CAD");
+}
+
+// get all currency list from API
+async function getAllCurrencies() {
+    const API_KEY = "2YMkb71wlxf9VlfYcXlpoOII3MPRHGopD7TGLsIk";
+    const URL = `https://api.freecurrencyapi.com/v1/currencies?apikey=${API_KEY}`;
+    const response = await fetch( URL );
+    if (!response.ok) {
+        console.log(`An error has occurred: ${response.status}`);
+    } else {
+        const responseJson = await response.json();
+        return responseJson.data;
+    }
+}
+createSelectCurrencyList();
+})
