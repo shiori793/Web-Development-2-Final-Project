@@ -5,33 +5,33 @@
 $(window).on("load", async function () {
   // ------------   test data   -------------- //
   // sessionStorageのuser_idの値を削除しておく
-  sessionStorage.removeItem("user_id");
+  // sessionStorage.removeItem("user_id");
   // sessionStorageにテスト用のuser_id名、”user1”を設定する
-  sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
+  // sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
 
   // localStorage内のすべてのデータを削除しておく
-  localStorage.clear();
+  // localStorage.clear();
 
   // localStorageにテスト用のデータを設定する
-  localStorage.setItem(
-    "user1",
+  // localStorage.setItem(
+  //   "user1",
     //JavaScriptオブジェクトをJSON文字列に変換
-    JSON.stringify({
-      mainCurrency: "CAD",
-      userInput: {
-        CAD: 1000,
-        USD: 100,
-      },
-      userOwn: {
-        CAD: 900,
-        USD: 200,
-      },
-    })
-  );
+  //   JSON.stringify({
+  //     mainCurrency: "CAD",
+  //     userInput: {
+  //       CAD: 1000,
+  //       USD: 100,
+  //     },
+  //     userOwn: {
+  //       CAD: 900,
+  //       USD: 200,
+  //     },
+  //   })
+  // );
   // ---------------------------------------- //
 
   // ユーザーIDをセッションから取得
-  const user_id = sessionStorage.getItem("user_id");
+  const user_id = sessionStorage.getItem("userID");
   if (!user_id) {
     // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
@@ -101,6 +101,9 @@ $(window).on("load", async function () {
       } else {
         user_data.userInput[mainCurrency] = depositData;
       }
+    }else {
+      user_data.userInput = {};
+      user_data.userInput[mainCurrency] = depositData;
     }
 
     if (user_data.hasOwnProperty("userOwn")) {
@@ -109,6 +112,9 @@ $(window).on("load", async function () {
       } else {
         user_data.userOwn[mainCurrency] = depositData;
       }
+    }else {
+      user_data.userOwn = {};
+      user_data.userOwn[mainCurrency] = depositData;
     }
 
     localStorage.setItem(user_id, JSON.stringify(user_data));

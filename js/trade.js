@@ -313,8 +313,8 @@ function accountNotFoundError() {
         typeAnimated: true,
         icon: 'fa fa-warning',
         buttons: {
-            Register: {
-                text: 'Register',
+            SignUp: {
+                text: 'SignUp',
                 btnClass: 'btn-red',
                 action: function(){
                     $(location).attr('href', '../signup.html');
