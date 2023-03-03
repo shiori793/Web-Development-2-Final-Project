@@ -30,7 +30,7 @@ $("#register").submit(function(event) {
        localStorage.setItem(`${email}`, JSON.stringify(User));
        let retrievedObject = localStorage.getItem(`${email}`);
        console.log(retrievedObject);
-       window.location.href = "http://127.0.0.1:5500/login.html";
+       window.location.href = "../login.html";
     } else {
         alert("Error, this email is already in use");
     }

@@ -1,6 +1,7 @@
-img {
+.img-fluid {
   height: 80vh !important;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
+  object-fit: cover; }
+
+.logo {
+  height: 2rem; }

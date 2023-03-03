@@ -1,0 +1,24 @@
+.logo {
+  height: 2rem; }
+
+main .top {
+  background-image: url("../img/topBackground.jpg");
+  background-size: cover;
+  color: white;
+  height: 40rem; }
+  main .top h1 {
+    padding: 20rem 10rem 0 10rem; }
+  main .top p {
+    padding: 0 10rem 0 10rem; }
+
+main .introduction {
+  padding-top: 8rem; }
+  main .introduction h2 {
+    text-align: center;
+    padding: 2rem; }
+  main .introduction .card-group {
+    display: flex; }
+  main .introduction .happy {
+    padding: 5rem;
+    text-align: center;
+    font-size: 20px; }
