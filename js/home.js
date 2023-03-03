@@ -5,36 +5,37 @@
 $(window).on("load", async function () {
   // ------------   test data   -------------- //
   // sessionStorageのuser_idの値を削除しておく
-  sessionStorage.removeItem("user_id");
+  // sessionStorage.removeItem("user_id");
   // sessionStorageにテスト用のuser_id名、”user1”を設定する
-  sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
+  // sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
 
   // localStorage内のすべてのデータを削除しておく
-  localStorage.clear();
+  // localStorage.clear();
 
   // localStorageにテスト用のデータを設定する
-  localStorage.setItem(
-    "user1",
-    //JavaScriptオブジェクトをJSON文字列に変換
-    JSON.stringify({
-      mainCurrency: "CAD",
-      userInput: {
-        CAD: 1000,
-        USD: 100,
-      },
-      userOwn: {
-        CAD: 900,
-        USD: 200,
-      },
-    })
-  );
+  // localStorage.setItem(
+  //   "user1",
+  //JavaScriptオブジェクトをJSON文字列に変換
+  //   JSON.stringify({
+  //     mainCurrency: "CAD",
+  //     userInput: {
+  //       CAD: 1000,
+  //       USD: 100,
+  //     },
+  //     userOwn: {
+  //       CAD: 900,
+  //       USD: 200,
+  //     },
+  //   })
+  // );
   // ---------------------------------------- //
 
   // ユーザーIDをセッションから取得
-  const user_id = sessionStorage.getItem("user_id");
+  const user_id = sessionStorage.getItem("userID");
   if (!user_id) {
     // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
+    window.location.href = "../login.html";
   } else {
     // user_idがあるとき
     // JSON形式の文字列をJavaScriptに変換する
@@ -45,8 +46,8 @@ $(window).on("load", async function () {
     if (!user_data) {
       // when localStorage doesn't have user data
       alert("Sorry, you don't have your account. Please register.");
+      window.location.href = "../signup.html";
     } else {
-
       //localStorageからmainCurrency取得
       const mainCurrency = user_data.mainCurrency;
       const exchangeRates = await getCurrencyRates(mainCurrency);
@@ -101,6 +102,9 @@ $(window).on("load", async function () {
       } else {
         user_data.userInput[mainCurrency] = depositData;
       }
+    } else {
+      user_data.userInput = {};
+      user_data.userInput[mainCurrency] = depositData;
     }
 
     if (user_data.hasOwnProperty("userOwn")) {
@@ -109,6 +113,9 @@ $(window).on("load", async function () {
       } else {
         user_data.userOwn[mainCurrency] = depositData;
       }
+    } else {
+      user_data.userOwn = {};
+      user_data.userOwn[mainCurrency] = depositData;
     }
 
     localStorage.setItem(user_id, JSON.stringify(user_data));
@@ -171,7 +178,7 @@ function getSumInMainCurrency(obj, exchangeRates, mainCurrency) {
   return sum;
 }
 
-const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
+const apiKey = "2YMkb71wlxf9VlfYcXlpoOII3MPRHGopD7TGLsIk";
 let currency = ""; // Change the value everytime user choose a different currency
 
 // parameter: Object including currency rate for user's main currency
@@ -221,14 +228,14 @@ async function getAPI(
   );
 
   currency = target_currency;
-  // const date_to = `${year}-${month}-${day}`;
-  const date_to = "2023-2-28";
+  const date_to = `${year}-${month}-${day}`;
+  // const date_to = "2023-2-28";
   const date_from = pastDate.toISOString().slice(0, 10);
 
   //  ---------------------------------------------  //
 
   // API
-  // const key = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
+  // const apiKey = "2YMkb71wlxf9VlfYcXlpoOII3MPRHGopD7TGLsIk";
   const url = `https://api.freecurrencyapi.com/v1/historical?apikey=${apiKey}&date_from=${date_from}&date_to=${date_to}&base_currency=${base_currency}&currencies=${target_currency}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -248,7 +255,7 @@ async function getAPI(
       }
       i++;
     }
-    showGraph(labels, datas);
+    showGraph(labels, datas, base_currency);
   }
 
   //1week & 1month
@@ -273,10 +280,12 @@ async function getAPI(
 }
 
 //  ------------------------------ Chart --------------------------------  //
-function showGraph(labels, datas) {
+function showGraph(labels, datas, mainCurrency) {
   const currencies = document.querySelectorAll(".currencyList");
   const currencyName = document.querySelector(".currency-name");
   const ctx = document.getElementById("chart");
+  // const mainCurrency = localStorage.getItem("mainCurrency");
+  // console.log(mainCurrency);
 
   const rateChart = new Chart(ctx, {
     type: "line",
@@ -293,37 +302,42 @@ function showGraph(labels, datas) {
   });
 
   // Click to change the time span
-  $(".btn-1w").click(() => {
+  $(".btn-1w").click(async function () {
     rateChart.destroy();
     // console.log(currency);
-    getAPI(0, 0, 7, "CAD", currency);
+    await getAPI(0, 0, 7, mainCurrency, currency);
   });
 
-  $(".btn-1m").click(() => {
+  $(".btn-1m").click(async function () {
     rateChart.destroy();
     // console.log(currency);
-    getAPI(0, 1, 0, "CAD", currency);
+    await getAPI(0, 1, 0, mainCurrency, currency);
   });
 
-  $(".btn-3m").click(() => {
+  $(".btn-3m").click(async function () {
     rateChart.destroy();
     // console.log(currency);
-    getAPI(0, 3, 0, "CAD", currency);
+    await getAPI(0, 3, 0, mainCurrency, currency);
   });
 
-  $(".btn-6m").click(() => {
+  $(".btn-6m").click(async function () {
     rateChart.destroy();
     // console.log(currency);
-    getAPI(0, 6, 0, "CAD", currency);
+    await getAPI(0, 6, 0, mainCurrency, currency);
   });
 
   currencies.forEach((cur) =>
-    cur.addEventListener("click", (e) => {
+    cur.addEventListener("click", async function (e) {
       rateChart.destroy();
       const className = e.target.classList.item(1);
-      currencyName.innerHTML = `CAD/${className}`;
+      currencyName.innerHTML = `${mainCurrency} / ${className}`;
       currency = className;
-      getAPI(0, 0, 7, "CAD", currency);
+      await getAPI(0, 0, 7, mainCurrency, currency);
     })
   );
 }
+
+$("#signout").on("click", function () {
+  sessionStorage.removeItem("userID");
+  window.location.href = "../login.html";
+});
