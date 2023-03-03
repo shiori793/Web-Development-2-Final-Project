@@ -46,6 +46,7 @@ $(window).on("load", async function () {
       // when localStorage doesn't have user data
       alert("Sorry, you don't have your account. Please register.");
     } else {
+
       //localStorageからmainCurrency取得
       const mainCurrency = user_data.mainCurrency;
       const exchangeRates = await getCurrencyRates(mainCurrency);
@@ -87,7 +88,6 @@ $(window).on("load", async function () {
   });
 
   //  ----------------- Deposit Function -----------------  //
-
   document.getElementById("deposit").onclick = function saveDeposit() {
     const depositData = parseFloat(
       document.getElementById("inputDeposit").value
