@@ -4,15 +4,31 @@
 
 main {
   .top {
-    height: 30rem;
+    background-image: url("../img/topBackground.jpg");
+    background-size: cover;
+    color: white;
+    height: 40rem;
       h1 {
-        padding: 10rem 10rem 0 10rem;
+        padding: 20rem 10rem 0 10rem;
       }
       p {
         padding: 0 10rem 0 10rem;
       }
-    .introduction {
-      
     }
+    .introduction {
+      padding-top: 8rem;
+      h2 {
+        text-align: center;
+        padding: 2rem;
+      }
+      .card-group{
+        display: flex;
+      }
+      .happy {
+        padding: 5rem;
+        text-align: center;
+        font-size: 20px;
+      }
+    }
+
   }
-}
