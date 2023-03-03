@@ -15,13 +15,25 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<link href="./css/login.css" rel="stylesheet" />
+		<!-- <link href="./css/login.css" rel="stylesheet" /> -->
 	</head>
 	<body>
+		<form id="login">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="login-button">LOG IN</button>
+        </form>
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 			crossorigin="anonymous"
 		></script>
+		<script src="js/login.js"></script>
 	</body>
 </html>
