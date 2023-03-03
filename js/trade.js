@@ -153,7 +153,9 @@ async function trade(user_id, type) {
                                     } else {
                                         sufficientError();
                                     }
-                                }   
+                                } else {
+                                    sufficientError();
+                                } 
                                 break;
                             case 'Ask':
                                 if(user_data.userOwn.hasOwnProperty(changeCurrency)) {
@@ -184,6 +186,8 @@ async function trade(user_id, type) {
                                     } else {
                                         insufficientBalanceError();
                                     }
+                                } else {
+                                    sufficientError();
                                 }
                             break;
                         }
