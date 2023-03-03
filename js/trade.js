@@ -3,20 +3,20 @@
 $( window ).on('load', async function() {
 
     // test data
-    sessionStorage.removeItem("userID");
-    sessionStorage.setItem("userID", "user_id");
+    // sessionStorage.removeItem("userID");
+    // sessionStorage.setItem("userID", "user_id");
 
-    localStorage.clear();
-    localStorage.setItem(
-        'user_id',
-        JSON.stringify({
-            mainCurrency: 'CAD',
-            userOwn: {
-                USD: 10000,
-                CAD: 10000
-            }
-        })
-    );
+    // localStorage.clear();
+    // localStorage.setItem(
+    //     'user_id',
+    //     JSON.stringify({
+    //         mainCurrency: 'CAD',
+    //         userOwn: {
+    //             USD: 10000,
+    //             CAD: 10000
+    //         }
+    //     })
+    // );
 
     const user_id = sessionStorage.getItem("userID");
     if (!user_id) { // when session does'nt have user id
@@ -308,7 +308,7 @@ function insufficientBalanceError() {
 function accountNotFoundError() {
     $.confirm({
         title: 'Account Not Found Error',
-        content: "Sorry, you don't have your account. Please Register.",
+        content: "Sorry, you don't have your account. Please Signup.",
         type: 'red',
         typeAnimated: true,
         icon: 'fa fa-warning',
@@ -317,7 +317,7 @@ function accountNotFoundError() {
                 text: 'Register',
                 btnClass: 'btn-red',
                 action: function(){
-                    $(location).attr('href', '../login.html');
+                    $(location).attr('href', '../signup.html');
                 }
             }
         }
