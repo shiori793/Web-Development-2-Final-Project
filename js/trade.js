@@ -151,10 +151,10 @@ async function trade(user_id, type) {
                                             }
                                         });
                                     } else {
-                                        sufficientError();
+                                        insufficientBalanceError();
                                     }
                                 } else {
-                                    sufficientError();
+                                    insufficientBalanceError();
                                 } 
                                 break;
                             case 'Ask':
@@ -187,7 +187,7 @@ async function trade(user_id, type) {
                                         insufficientBalanceError();
                                     }
                                 } else {
-                                    sufficientError();
+                                    insufficientBalanceError();
                                 }
                             break;
                         }
