@@ -171,7 +171,7 @@ function getSumInMainCurrency(obj, exchangeRates, mainCurrency) {
   return sum;
 }
 
-const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
+const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
 let currency = ""; // Change the value everytime user choose a different currency
 
 // parameter: Object including currency rate for user's main currency
