@@ -15,7 +15,7 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<!-- <link href="./css/trade.css" rel="stylesheet" /> -->
+		<link href="./css/home.css" rel="stylesheet" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -27,62 +27,30 @@
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-expand-lg bg-light">
+			<!-- navbar -->
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar</a>
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
+					<a class="navbar-brand" href="./home.html">
+						<img src="img/FX-logo 1.png" alt="fx-logo" class="logo px-2">
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item px-2" >
+								<a class="navmenu" href="./home.html">Dashboard</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
+							<li class="nav-item px-2" >
+								<a class="navmenu" href="./trade.html">Trade</a>
 							</li>
-							<li class="nav-item dropdown">
-								<a
-									class="nav-link dropdown-toggle"
-									href="#"
-									role="button"
-									data-bs-toggle="dropdown"
-									aria-expanded="false"
-								>
-									Dropdown
-								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">Action</a></li>
-									<li><a class="dropdown-item" href="#">Another action</a></li>
-									<li><hr class="dropdown-divider" /></li>
-									<li>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</li>
-								</ul>
+							<li class="nav-item px-2" >
+								<i class="fa-solid fa-user icon"></i>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link disabled">Disabled</a>
+							<li class="nav-item px-2">
+								<a id="signout"><i class="fa-solid fa-arrow-right-from-bracket icon"></i></a>
 							</li>
 						</ul>
-						<form class="d-flex" role="search">
-							<input
-								class="form-control me-2"
-								type="search"
-								placeholder="Search"
-								aria-label="Search"
-							/>
-							<button class="btn btn-outline-success" type="submit">
-								Search
-							</button>
-						</form>
 					</div>
 				</div>
 			</nav>
@@ -146,7 +114,7 @@
 					<a href="#" class="nav-link px-2 text-muted">About</a>
 				</li>
 			</ul>
-			<p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+			<p class="text-center text-muted">&copy; 2023 FX Trade, Inc</p>
 		</footer>
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
