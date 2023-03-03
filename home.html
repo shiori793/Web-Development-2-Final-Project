@@ -39,7 +39,7 @@
 
 		<main>
 			<div class="totalAmounts">
-				<i class="fa-solid fa-coins deposit"></i>
+					<i class="fa-solid fa-coins deposit depositIcon"><span class="tooltiptext">Click to Deposit</span></i>
 				<div class="moneySaved">
 					<p class="words">MONEY SAVED</p>
 					<p class="moneySavedPrice"></p>
@@ -51,14 +51,19 @@
 			</div>
 			<div class="dataSection">
 				<div class="rate">
+					<p class="latestRate">LATEST RATE</p>
 					<ul class="rateList"></ul>
 				</div>
 				<div class="chart">
-          <p class="currency-name">CAD/USD</p>
-          <button type="button" class="btn btn-light btn-1w">1 Week</button>
-          <button type="button" class="btn btn-light btn-1m">1 Month</button>
-          <button type="button" class="btn btn-light btn-3m">3 Month</button>
-          <button type="button" class="btn btn-light btn-6m">6 Month</button>
+					<div class="chart-header">
+						<p class="currency-name">CAD/USD</p>
+						<div class="btn-list">
+							<button type="button" class="btn btn-light btn-1w">1 Week</button>
+							<button type="button" class="btn btn-light btn-1m">1 Month</button>
+							<button type="button" class="btn btn-light btn-3m">3 Month</button>
+							<button type="button" class="btn btn-light btn-6m">6 Month</button>
+						</div>
+					</div>
 					<canvas id="chart" width="600" height="300" style="display: block; box-sizing: border-box; height: 400px; width: 800px;"></canvas>
 					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 				</div>
