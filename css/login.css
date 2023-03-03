@@ -1,0 +1,6 @@
+img {
+  height: 80vh !important;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}

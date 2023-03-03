@@ -15,20 +15,74 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<!-- <link href="./css/login.css" rel="stylesheet" /> -->
+		<link href="./css/login.css" rel="stylesheet" />
 	</head>
 	<body>
-		<form id="login">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+		<!-- filler navbar -->
+		<nav class="navbar navbar-expand-lg bg-light">
+			<div class="container-fluid">
+				<!-- Navbar logo / placeholder Icon for company logo -->
+				<a class="navbar-brand" href="#">
+					<!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"> -->
+					<i class="bi bi-currency-exchange"></i>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<!-- company name (homepage) + nav items -->
+					<li class="nav-item">
+						<a class="nav-link active" href="#">FX TRADER</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#">About Us</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<!-- Testing dropdown to see if it works on logo -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person-circle"></i>
+						</a>
+						<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">Sign Up</a></li>
+						<li><a class="dropdown-item" href="#">Log In</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#">Something else here</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled">Disabled</a>
+					</li>
+					</ul>
+					<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<main class="m-5 d-flex justify-content-evenly">
+            <!-- login form -->
+			<form id="login" class="col-md-4 col-sm-12 d-flex flex-column justify-content-center">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email address</label>
+					<input type="email" class="form-control rounded-pill" id="email" aria-describedby="emailHelp" required>
+				</div>
+				<div class="mb-5">
+					<label for="password" class="form-label">Password</label>
+					<input type="password" class="form-control rounded-pill" id="password" required>
+				</div>
+				<button type="submit" class="btn btn-info text-white text-center mx-auto px-4 rounded-pill" id="login-button">LOG IN</button>
+			</form>
+            <div class="signupPicture col-md-4 d-none d-sm-block">
+                <img src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" class="img-fluid login-image" alt="">
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="login-button">LOG IN</button>
-        </form>
+        </main>
+
+
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
