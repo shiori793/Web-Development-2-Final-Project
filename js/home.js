@@ -4,15 +4,15 @@
 
 $(window).on("load", async function () {
   // ------------   test data   -------------- //
-  //sessionStorageのuser_idの値を削除しておく
+  // sessionStorageのuser_idの値を削除しておく
   sessionStorage.removeItem("user_id");
-  //sessionStorageにテスト用のuser_id名、”user1”を設定する
+  // sessionStorageにテスト用のuser_id名、”user1”を設定する
   sessionStorage.setItem("user_id", "user1"); //(第1引数:保存するデータのキー,第2引数:保存するデータの値を指定)
 
-  //localStorage内のすべてのデータを削除しておく
+  // localStorage内のすべてのデータを削除しておく
   localStorage.clear();
 
-  //localStorageにテスト用のデータを設定する
+  // localStorageにテスト用のデータを設定する
   localStorage.setItem(
     "user1",
     //JavaScriptオブジェクトをJSON文字列に変換
@@ -20,9 +20,11 @@ $(window).on("load", async function () {
       mainCurrency: "CAD",
       userInput: {
         CAD: 1000,
+        USD: 100,
       },
       userOwn: {
-        CAD: 10000,
+        CAD: 900,
+        USD: 200,
       },
     })
   );
@@ -30,40 +32,49 @@ $(window).on("load", async function () {
 
   // ユーザーIDをセッションから取得
   const user_id = sessionStorage.getItem("user_id");
-  // JSON形式の文字列をJavaScriptに変換する
-  let user_data = JSON.parse(localStorage.getItem(user_id));
-  // 取得したデータがuser_dataに代入されている
-  console.log(user_data);
-
-  //localStorageからmainCurrency取得
-  const mainCurrency = user_data.mainCurrency;
-
-  //localStorageからmainCurrencyの金額を取得
-  const userAmount = Object.values(user_data.userOwn)[0];
-
   if (!user_id) {
     // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
   } else {
     // user_idがあるとき
-    showCurrencyRateList();
-    await getAPI();
+    // JSON形式の文字列をJavaScriptに変換する
+    let user_data = JSON.parse(localStorage.getItem(user_id));
+    // 取得したデータがuser_dataに代入されている
+    console.log(user_data);
+
     if (!user_data) {
       // when localStorage doesn't have user data
       alert("Sorry, you don't have your account. Please register.");
     } else {
-      if (user_data.hasOwnProperty("userOwn")) {
-        calculateAmount(userAmount, mainCurrency);
-        // calculateProfit(user_data,?????);
-        deposit(userAmount);
-      } else {
-      }
+
+      //localStorageからmainCurrency取得
+      const mainCurrency = user_data.mainCurrency;
+      const exchangeRates = await getCurrencyRates(mainCurrency);
+      // const userInput = Object.values(user_data.userInput);
+      // if (user_data.userInput == null) {
+      //   user_data.userInput = {};
+      // }
+      // const userOwn = Object.values(user_data.userOwn);
+      // if (user_data.userOwn == null) {
+      //   user_data.userOwn = {};
+      // }
+
+      //localStorageからmainCurrencyの金額を取得
+      // const userAmount = Object.values(user_data.userOwn)[0];
+
+      // const moneySaved = document.querySelector(".moneySavedPrice");
+      // moneySaved.innerHTML =
+      displayDepositedAmount(user_data, exchangeRates);
+      calculateProfit(user_data, exchangeRates);
+      showCurrencyRateList(exchangeRates, mainCurrency);
+      await getAPI();
     }
   }
 
   //  ----------------- Deposit Modal -----------------  //
   const deposit = document.querySelector(".deposit");
   const depositModal = document.querySelector(".depositModal");
+  const userInput = document.getElementById("inputDeposit");
   const closeModal = document.querySelector(".closeModal");
   const overlay = document.querySelector(".overlay");
 
@@ -77,83 +88,116 @@ $(window).on("load", async function () {
   });
 
   //  ----------------- Deposit Function -----------------  //
-  // showDeposit();
-  
-  // Save deposit data
-  function deposit(userAmount){
   document.getElementById("deposit").onclick = function saveDeposit() {
-    const depositInput = document.getElementById("inputDeposit").value;
-    console.log(`depositInput = ${depositInput}`);
-    const totalMoneySaved = userAmount + depositInput;
+    const depositData = parseFloat(
+      document.getElementById("inputDeposit").value
+    );
 
-    localStorage.setItem(`userInput`, depositInput);
-    localStorage.setItem(`userOwn`, depositInput);
+    user_data = JSON.parse(localStorage.getItem(user_id));
+    const mainCurrency = user_data.mainCurrency;
+    if (user_data.hasOwnProperty("userInput")) {
+      if (user_data.userInput.hasOwnProperty(mainCurrency)) {
+        user_data.userInput[mainCurrency] += depositData;
+      } else {
+        user_data.userInput[mainCurrency] = depositData;
+      }
+    }
+
+    if (user_data.hasOwnProperty("userOwn")) {
+      if (user_data.userOwn.hasOwnProperty(mainCurrency)) {
+        user_data.userOwn[mainCurrency] += depositData;
+      } else {
+        user_data.userOwn[mainCurrency] = depositData;
+      }
+    }
+
+    localStorage.setItem(user_id, JSON.stringify(user_data));
+
+    displayDepositedAmount(user_data, mainCurrency);
     depositModal.classList.remove("active");
     overlay.classList.remove("active");
-    // showDeposit();
-  }}
+    $(location).attr("href", "../home.html");
+  };
+});
 
-  //Show deposit data
-  // function showDeposit() {
-  //   const depositStorage = localStorage.getItem(`userInput`);
-  //   console.log(`depositStorage = ${depositStorage}`);
-  //   if (depositStorage) {
-  //     document.getElementsByClassName("moneySavedPrice")[0].textContent = depositStorage;
-  //   } else {
-  //     document.getElementsByClassName("moneySavedPrice")[0].innerHTML = "No Data";
-  //   }
-  // }
-})
+//  ----------------- Deposit Function -----------------  //
 
-// parameter: userAmount object (userInput, userOwn), main currency
-// convert all values in userAmount object to user's main currency based on inputted currentRateList(Object)
-// return sum of all values
+function calculateProfit(userObject, exchangeRates) {
+  const revenueMade = document.querySelector(".revenueMadePrice");
 
-function calculateAmount(userAmount, mainCurrency, currentRateList) {
-  const moneySavedAmount = document.querySelector(".moneySavedPrice");
-  moneySavedAmount.innerHTML = `${mainCurrency} ${userAmount}`;
+  const revenueMadeAmount = userObject.hasOwnProperty("userInput")
+    ? getSumInMainCurrency(
+        userObject.userInput,
+        exchangeRates,
+        userObject.mainCurrency
+      )
+    : 0;
+  const moneySavedAmount = userObject.hasOwnProperty("userOwn")
+    ? getSumInMainCurrency(
+        userObject.userOwn,
+        exchangeRates,
+        userObject.mainCurrency
+      )
+    : 0;
+
+  revenueMade.innerHTML = `${userObject.mainCurrency} ${(
+    moneySavedAmount - revenueMadeAmount
+  ).toFixed(2)}`;
 }
 
-// function calculateAmount(userAmount, mainCurrency, currentRateList) {}
-// function calculateAmount(userAmount, mainCurrency, currentRateList) {
+function displayDepositedAmount(userObject, exchangeRates) {
+  const moneySaved = document.querySelector(".moneySavedPrice");
+  const moneySavedAmount = userObject.hasOwnProperty("userOwn")
+    ? getSumInMainCurrency(
+        userObject.userOwn,
+        exchangeRates,
+        userObject.mainCurrency
+      )
+    : 0;
+  moneySaved.innerHTML = `${userObject.mainCurrency} ${moneySavedAmount.toFixed(
+    2
+  )}`;
+}
 
-// }
-//  ----------------- Deposit Function -----------------  //
-// document.getElementById("deposit").onclick = function saveDeposit() {
-//   const depositData = document.getElementById("inputDeposit").value;
-//   console.log(`depositData = ${depositData}`);
-//   localStorage.setItem(`depositData`, depositData);
-// }
-
-
-// parameter: userObject
-// calculate sum value of user input (localStorage) and user own (localStorage) in main currency
-// return difference between these values
-function calculateProfit(userObject, currentRateList) {}
+function getSumInMainCurrency(obj, exchangeRates, mainCurrency) {
+  let sum = 0;
+  for (curr in obj) {
+    if (curr != mainCurrency) {
+      sum += obj[curr] / exchangeRates[curr];
+    } else {
+      sum += obj[curr];
+    }
+  }
+  return sum;
+}
 
 const apiKey = "ZTpECrZhl2AkmZ8570exASoWc5gHtFQ4pVXpWOLU";
 let currency = ""; // Change the value everytime user choose a different currency
 
 // parameter: Object including currency rate for user's main currency
 // add list object to home.html
-function showCurrencyRateList() {
-  // const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
-  const baseCurrency = "CAD";
-  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=USD%2CEUR%2CGBP%2CAUD%2CNZD%2CJPY%2CTRY&base_currency=CAD`;
+function showCurrencyRateList(exchangeRates, mainCurrency) {
+  const listArea = document.querySelector(".rateList");
+  const showCurrencyList = ["USD", "EUR", "GBP", "AUD", "NZD", "JPY", "TRY"];
+  for (const item of showCurrencyList) {
+    const exchangeRateItem = document.createElement("li");
+    exchangeRateItem.className = `currencyList ${item}`;
+    exchangeRateItem.textContent = `${mainCurrency} / ${item} ${exchangeRates[
+      item
+    ].toFixed(4)}`;
+    listArea.appendChild(exchangeRateItem);
+  }
+}
 
-  fetch(apiURL)
-    .then((response) => response.json())
-    .then((data) => {
-      const exchangeRates = data.data;
-      const listArea = document.querySelector(".rateList");
-      for (const item in exchangeRates) {
-        const exchangeRateItem = document.createElement("li");
-        exchangeRateItem.className = `currencyList ${item}`;
-        exchangeRateItem.textContent = `${baseCurrency} / ${item} ${exchangeRates[item]}`;
-        listArea.appendChild(exchangeRateItem);
-      }
-    })
-    .catch((error) => console.error("Error fetching exchange rates:", error));
+async function getCurrencyRates(mainCurrency) {
+  const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&base_currency=${mainCurrency}`;
+  const response = await fetch(apiURL);
+  if (!response.ok) {
+    console.log(`An error has occurred: ${response.status}`);
+  } else {
+    const responseJson = await response.json();
+    return responseJson.data;
+  }
 }
 
 //Chart.js
