@@ -2,6 +2,36 @@ $primary-fontsize: 12px;
 $secondary-fontsize: 30px;
 $primary-color: #56cfe1;
 
+nav {
+  .logo {
+    height: 2rem;
+  }
+
+  .icon {
+    font-size: 1.3rem;
+    margin-right: 1rem;
+  }
+
+  .navmenu {
+    margin-bottom: 0;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: black;
+  }
+
+  .icon:hover,
+  .navmenu:hover {
+    color: rgb(167, 167, 167);
+  }
+
+  .icon:active,
+  .navmenu:active {
+    color: black;
+    position: relative;
+    top: 2px;
+  }
+}
+
 main {
   .totalAmounts {
     display: flex;
@@ -69,6 +99,7 @@ main {
 
     .words {
       font-size: 16px;
+      font-weight: bold;
     }
     .moneySaved {
       padding: 0.5rem 2rem 0 1rem;
@@ -84,6 +115,7 @@ main {
     .latestRate {
       padding-left: 2rem;
       font-size: 16px;
+      font-weight: bold;
     }
     .rateList {
       list-style: none;
