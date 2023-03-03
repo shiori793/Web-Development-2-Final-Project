@@ -15,7 +15,7 @@ $(window).on("load", async function () {
   // localStorageにテスト用のデータを設定する
   // localStorage.setItem(
   //   "user1",
-  //JavaScriptオブジェクトをJSON文字列に変換
+
   //   JSON.stringify({
   //     mainCurrency: "CAD",
   //     userInput: {
@@ -35,7 +35,8 @@ $(window).on("load", async function () {
   if (!user_id) {
     // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
-    window.location.href = "../login.html";
+
+    window.location.href = "../login.html"
   } else {
     // user_idがあるとき
     // JSON形式の文字列をJavaScriptに変換する
@@ -46,7 +47,8 @@ $(window).on("load", async function () {
     if (!user_data) {
       // when localStorage doesn't have user data
       alert("Sorry, you don't have your account. Please register.");
-      window.location.href = "../signup.html";
+
+      window.location.href = "../signup.html"
     } else {
       //localStorageからmainCurrency取得
       const mainCurrency = user_data.mainCurrency;
@@ -102,7 +104,8 @@ $(window).on("load", async function () {
       } else {
         user_data.userInput[mainCurrency] = depositData;
       }
-    } else {
+
+    }else {
       user_data.userInput = {};
       user_data.userInput[mainCurrency] = depositData;
     }
@@ -113,7 +116,8 @@ $(window).on("load", async function () {
       } else {
         user_data.userOwn[mainCurrency] = depositData;
       }
-    } else {
+
+    }else {
       user_data.userOwn = {};
       user_data.userOwn[mainCurrency] = depositData;
     }
@@ -178,7 +182,9 @@ function getSumInMainCurrency(obj, exchangeRates, mainCurrency) {
   return sum;
 }
 
-const apiKey = "2YMkb71wlxf9VlfYcXlpoOII3MPRHGopD7TGLsIk";
+
+const apiKey = "h9MxoIrQVMoJSCQCN9QyApxFaqqYZ0N9x5TNxWh2";
+
 let currency = ""; // Change the value everytime user choose a different currency
 
 // parameter: Object including currency rate for user's main currency
@@ -337,7 +343,9 @@ function showGraph(labels, datas, mainCurrency) {
   );
 }
 
-$("#signout").on("click", function () {
-  sessionStorage.removeItem("userID");
-  window.location.href = "../login.html";
+
+$('#signout').on('click', function() {
+  sessionStorage.removeItem('userID');
+  window.location.href = "../login.html"
 });
+
