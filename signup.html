@@ -20,7 +20,11 @@
 	</head>
 	<body>
         <!-- simple form to test functionality -->
-        <form id="register">
+        <!-- <div>
+
+        </div> -->
+        <form id="register" class="col-4">
+            <h2>Create Your Account</h2>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
@@ -39,14 +43,6 @@
                 <input type="text" class="form-control" id="lastName">
             </div>
             <select class="form-select" aria-label="Default select example" id="mainCurrency">
-                <!-- <option selected value="CAD">CAD</option>
-                <option value="AUD">AUD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
-                <option value="NZD">NZD</option>
-                <option value="TRY">TRY</option>
-                <option value="USD">USD</option>  -->
               </select>
             <button type="submit" class="btn btn-primary" id="submitForm">Submit</button>
         </form>

@@ -11,7 +11,7 @@ class newUser {
     }
 }
 
-$("#register").submit(function(event) {
+$("#submitForm").click(function(event) {
     event.preventDefault();
     
     let email = $("#email").val();
@@ -28,8 +28,9 @@ $("#register").submit(function(event) {
        localStorage.setItem(`${email}`, JSON.stringify(User));
        let retrievedObject = localStorage.getItem(`${email}`);
        console.log(retrievedObject);
+       window.location.href = "http://127.0.0.1:5500/login.html";
     } else {
-        console.log("Error, this email is already in use");
+        alert("Error, this email is already in use");
     }
 })
 
