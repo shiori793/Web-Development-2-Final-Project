@@ -323,3 +323,8 @@ function accountNotFoundError() {
         }
     });
 }
+
+$('#signout').on('click', function() {
+    sessionStorage.removeItem('userID');
+    $(location).attr('href', '../login.html');
+});

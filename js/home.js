@@ -35,6 +35,7 @@ $(window).on("load", async function () {
   if (!user_id) {
     // user_idがないとき
     alert("Sorry, this is invalid session. Please login.");
+    window.location.href = "../login.html"
   } else {
     // user_idがあるとき
     // JSON形式の文字列をJavaScriptに変換する
@@ -45,6 +46,7 @@ $(window).on("load", async function () {
     if (!user_data) {
       // when localStorage doesn't have user data
       alert("Sorry, you don't have your account. Please register.");
+      window.location.href = "../signup.html"
     } else {
 
       //localStorageからmainCurrency取得
@@ -333,3 +335,8 @@ function showGraph(labels, datas) {
     })
   );
 }
+
+$('#signout').on('click', function() {
+  sessionStorage.removeItem('userID');
+  window.location.href = "../login.html"
+});

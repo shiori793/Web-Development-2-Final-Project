@@ -15,20 +15,71 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<!-- <link href="./css/login.css" rel="stylesheet" /> -->
+		<link href="./css/login.css" rel="stylesheet" />
 	</head>
 	<body>
-		<form id="login">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+		<!-- navbar -->
+	<div>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<img src="img/FX-logo 1.png" alt="fx-logo" class="logo px-2">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item px-2" >
+							<a class="nav-link active" aria-current="page" href="signup.html">Sign up</a>
+						</li>
+						<li class="nav-item px-2">
+							<a class="nav-link active" href="login.html">Log in</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+		<main class="m-5 d-flex justify-content-evenly">
+            <!-- login form -->
+			<form id="login" class="col-md-4 col-sm-12 d-flex flex-column justify-content-center">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email address</label>
+					<input type="email" class="form-control rounded-pill" id="email" aria-describedby="emailHelp" required>
+				</div>
+				<div class="mb-5">
+					<label for="password" class="form-label">Password</label>
+					<input type="password" class="form-control rounded-pill" id="password" required>
+				</div>
+				<button type="submit" class="btn btn-info text-white text-center mx-auto px-4 rounded-pill" id="login-button">LOG IN</button>
+			</form>
+            <div class="signupPicture col-md-4 d-none d-sm-block">
+                <img src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" class="img-fluid login-image" alt="">
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="login-button">LOG IN</button>
-        </form>
+        </main>
+		<footer class="py-3 my-4">
+			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Home</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Features</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">Pricing</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">FAQs</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link px-2 text-muted">About</a>
+				</li>
+			</ul>
+			<p class="text-center text-muted">&copy; 2023 FX Trade, Inc</p>
+		</footer>
+
+
 		<script
 			src="https://code.jquery.com/jquery-3.6.3.js"
 			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
