@@ -7,11 +7,10 @@ class newUser {
         this.email = email;
         this.password = password;
         this.mainCurrency = mainCurrency;
-        // this.mainCurrency = mainCurrency;
     }
 }
 
-$("#submitForm").click(function(event) {
+$("#register").submit(function(event) {
     event.preventDefault();
     
     let email = $("#email").val();
@@ -19,10 +18,13 @@ $("#submitForm").click(function(event) {
     let firstName = $("#firstName").val();
     let lastName = $("#lastName").val();
     let mainCurrency = $("#mainCurrency").val();
-    // let mainCurrency = $("#")
+
+    if (!validateEmail(email) || (!validateForm(password, firstName, lastName, mainCurrency))) {
+        window.history.back();
+    }
     
+    validateForm()
     let checkEmail = localStorage.getItem(`${email}`);
-    console.log(checkEmail);
     if (checkEmail === null) {
        let User = new newUser(email, password, firstName, lastName, mainCurrency);
        localStorage.setItem(`${email}`, JSON.stringify(User));
@@ -37,6 +39,12 @@ $("#submitForm").click(function(event) {
 function validateEmail(email) {
     let regex = /^\S+@\S+\.\S+$/;
     return regex.test(email);
+}
+
+function validateForm(password, firstName, lastName, mainCurrency) {
+    if (password === "" || firstName === "" || lastName === "" || mainCurrency === "") {
+        return false;
+    }
 }
 
 async function createSelectCurrencyList() {

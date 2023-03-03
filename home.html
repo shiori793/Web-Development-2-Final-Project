@@ -25,52 +25,17 @@
 		<link href="./css/home.css" rel="stylesheet" />
 	</head>
 	<body>
-		<!-- Creating Navbar -->
-		<nav class="navbar navbar-expand-lg bg-light">
-			<div class="container-fluid">
-				<!-- Navbar logo / placeholder Icon for company logo -->
-				<a class="navbar-brand" href="#">
-					<!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"> -->
-					<i class="bi bi-currency-exchange"></i>
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<!-- company name (homepage) + nav items -->
-					<li class="nav-item">
-						<a class="nav-link active" href="#">FX TRADER</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">About Us</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<!-- Testing dropdown to see if it works on logo -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-person-circle"></i>
-						</a>
-						<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Sign Up</a></li>
-						<li><a class="dropdown-item" href="#">Log In</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link disabled">Disabled</a>
-					</li>
-					</ul>
-					<form class="d-flex" role="search">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
-				</div>
-			</div>
-		</nav>
+		<header>
+			<!-- navbar -->
+			<ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Dashboard</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Trade</button>
+				</li>
+			</ul>
+		</header>
 
 		<main>
 			<div class="totalAmounts">
