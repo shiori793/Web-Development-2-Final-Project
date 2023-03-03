@@ -15,61 +15,66 @@
 			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 			crossorigin="anonymous"
 		></script>
-		<!-- cdn for bootstrap logos for testing navbar -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+		<script src="./js/home.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link href="./css/home.css" rel="stylesheet" />
 	</head>
 	<body>
-		<!-- Creating Navbar -->
-		<nav class="navbar navbar-expand-lg bg-light">
-			<div class="container-fluid">
-				<!-- Navbar logo / placeholder Icon for company logo -->
-				<a class="navbar-brand" href="#">
-					<!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"> -->
-					<i class="bi bi-currency-exchange"></i>
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<!-- company name (homepage) + nav items -->
-					<li class="nav-item">
-						<a class="nav-link active" href="#">FX TRADER</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">About Us</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<!-- Testing dropdown to see if it works on logo -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-person-circle"></i>
-						</a>
-						<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Sign Up</a></li>
-						<li><a class="dropdown-item" href="#">Log In</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link disabled">Disabled</a>
-					</li>
-					</ul>
-					<form class="d-flex" role="search">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
+		<header>
+			<!-- navbar -->
+			<ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Dashboard</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Trade</button>
+				</li>
+			</ul>
+		</header>
+
+		<main>
+			<div class="totalAmounts">
+				<i class="fa-solid fa-coins deposit"></i>
+				<div class="moneySaved">
+					<p class="words">MONEY SAVED</p>
+					<p class="moneySavedPrice"></p>
+				</div>
+				<div class="revenueMade">
+					<p class="words">REVENUE MADE</p>
+					<p class="revenueMadePrice"></p>
 				</div>
 			</div>
-		</nav>
-		<script
-			src="https://code.jquery.com/jquery-3.6.3.js"
-			integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-			crossorigin="anonymous"
-		></script>
-	</body>
+			<div class="dataSection">
+				<div class="rate">
+					<ul class="rateList"></ul>
+				</div>
+				<div class="chart">
+          <p class="currency-name">CAD/USD</p>
+          <button type="button" class="btn btn-light btn-1w">1 Week</button>
+          <button type="button" class="btn btn-light btn-1m">1 Month</button>
+          <button type="button" class="btn btn-light btn-3m">3 Month</button>
+          <button type="button" class="btn btn-light btn-6m">6 Month</button>
+					<canvas id="chart" width="600" height="300" style="display: block; box-sizing: border-box; height: 400px; width: 800px;"></canvas>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				</div>
+			</div>
+
+			<div class="overlay"></div>
+			<div class="depositModal">
+				<i class="fa-solid fa-xmark closeModal"></i>
+				<div class="modalContent">
+					<h2>Deposit Money</h2>
+					<input name="inputDeposit" id="inputDeposit" type="number" required>
+					<button type="button" id="deposit" class="btn btn-dark closeModal">Deposit</button>
+				</div>
+		</main>
+    <footer>
+      <!-- footer -->
+    </footer>
+  </body>
 </html>
